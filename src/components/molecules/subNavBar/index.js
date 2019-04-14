@@ -1,13 +1,13 @@
 import React from 'react';
 
-const subNavBar = () => {
+const SubNavBar = () => {
   return (
-    <div>
+    <span>
       <a>정보수정</a>
       <a>메뉴수정</a>
       <a>이벤트관리</a>
-    </div>
+    </span>
   );
 };
 
-export default subNavBar;
+export default SubNavBar;

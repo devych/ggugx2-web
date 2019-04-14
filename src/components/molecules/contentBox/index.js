@@ -1,12 +1,12 @@
 import React from 'react';
 
-const contentBox = ({ contentTitle, contentImg }) => {
+const ContentBox = ({ contentTitle, contentImg }) => {
   return (
     <span>
       <h3>{contentTitle}</h3>
-      <img src={contentImg} alter={contentTitle} />
+      <img src={contentImg} alt={contentTitle} />
     </span>
   );
 };
 
-export default contentBox;
+export default ContentBox;

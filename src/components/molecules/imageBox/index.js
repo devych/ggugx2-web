@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from '../../atoms/image/index';
 
-const imageBox = ({ imgs }) => {
+const ImageBox = ({ imgs }) => {
   return (
     <span>
       <Image src={imgs} />
@@ -11,4 +11,4 @@ const imageBox = ({ imgs }) => {
   );
 };
 
-export default imageBox;
+export default ImageBox;
