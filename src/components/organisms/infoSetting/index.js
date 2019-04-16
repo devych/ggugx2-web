@@ -21,7 +21,7 @@ const InfoSetting = () => {
         <InfoEntrySet label={'가게번호'} children={'등록'} />
       </span>
       <span>
-        <Select option={option} />
+        <Select option={option} key={option} />
         <Input placeholder={'쿠폰갯수'} />
         <Button children={'등록'} />
       </span>
