@@ -1,0 +1,33 @@
+.registerBox {
+  margin: 0 5px;
+  border-color: chocolate;
+  border-style: solid;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-gap: 10px;
+  grid-template-areas:
+    '. a .'
+    '. b .'
+    '. . c';
+  justify-items: center;
+}
+
+.bigTitle {
+  grid-area: a;
+  align-content: center;
+  margin: 0 0 5px 5px;
+  padding: 3px;
+}
+
+.registerLabelList {
+  grid-area: b;
+  align-content: center;
+  margin: 0 0 5px 5px;
+  padding: 3px;
+}
+.registerButton {
+  grid-area: c;
+  align-content: center;
+  margin: 0 0 5px 5px;
+  padding: 3px;
+}

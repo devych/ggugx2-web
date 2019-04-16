@@ -1,0 +1,20 @@
+.registerLabel {
+  margin: 5px 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  grid-template-areas: 'a c';
+  justify-items: center;
+}
+
+.label {
+  grid-area: a;
+  margin: 0 0 5px 5px;
+  padding: 3px;
+}
+
+.registerInput {
+  grid-area: c;
+  margin: 0 0 5px 5px;
+  padding: 3px;
+}
