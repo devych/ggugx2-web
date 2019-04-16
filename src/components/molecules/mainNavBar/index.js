@@ -2,12 +2,12 @@ import React from 'react';
 
 const mainNavBar = () => {
   return (
-    <div>
-      <h3>Main</h3>
-      <h3>고객관리</h3>
-      <h3>매장관리</h3>
-      <h3>통계</h3>
-    </div>
+    <span>
+      {/* <NavLink to="/MainPage">Main</NavLink>
+      <NavLink to="/MainPage">고객관리</NavLink>
+      <NavLink to="/MainPage">매장관리</NavLink>
+      <NavLink to="/MainPage">통계</NavLink> */}
+    </span>
   );
 };
 

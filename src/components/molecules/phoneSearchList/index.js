@@ -1,24 +1,17 @@
+/* eslint-disable indent */
 import React from 'react';
 import Input from '../../atoms/input/index';
 
-const phoneSearchList = () => {
+const phoneSearchList = ({ phoneEntry }) => {
   return (
-    <span>
+    <span className="phoneSearchBox">
       <Input type="text" placeholder="휴대폰 번호" />
-      <br />
-      <span>
-        <ul>
-          123
-          <br />
-        </ul>
-        <ul>
-          123
-          <br />
-        </ul>
-        <ul>
-          123
-          <br />
-        </ul>
+      <span className="phoneSearch">
+        {phoneEntry
+          ? phoneEntry.map(item => (
+              <ul key={item.phoneNumber}>{item.phoneNumber}</ul>
+            ))
+          : null}
       </span>
     </span>
   );

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const ContentBox = ({ contentTitle, contentImg }) => {
+const ContentBox = ({ contentTitle, contentImg, className }) => {
   return (
-    <span>
+    <span className={className}>
       <h3>{contentTitle}</h3>
       <img src={contentImg} alt={contentTitle} />
     </span>
