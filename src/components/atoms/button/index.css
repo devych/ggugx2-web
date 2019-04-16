@@ -1,0 +1,15 @@
+.Button {
+  display: inline-block;
+  width: 8rem;
+  border: 0px solid black;
+  border-radius: 4px;
+  background-color: rgb(253, 202, 10);
+  font-size: 20px;
+  color: black;
+  transition-property: background-color;
+  transition-duration: 200ms;
+}
+.Button:hover {
+  background-color: hsl(46, 98%, 67%);
+  color: rgb(223, 58, 47);
+}

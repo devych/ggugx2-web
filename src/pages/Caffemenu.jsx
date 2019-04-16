@@ -15,7 +15,7 @@ const Caffemenu = () => {
       <span>
         <SubNavBar />
         <br />
-        <a>메뉴수정</a>
+        <h3>메뉴수정</h3>
         <br />
 
         <CafeMenuEdit />

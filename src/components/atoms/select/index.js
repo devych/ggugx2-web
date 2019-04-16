@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React from 'react';
 import Option from '../option/index';
 
@@ -21,9 +22,11 @@ const Select = ({
       require={require}
       onChange={onChange}
     >
-      {option.map(item => (
-        <option value={item.value} children={item.children} />
-      ))}
+      {option
+        ? option.map(item => (
+            <Option value={item.value} children={item.children} />
+          ))
+        : '1'}
     </select>
   );
 };

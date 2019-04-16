@@ -16,7 +16,7 @@ const Caffeinfo = () => {
         <SubNavBar />
 
         <br />
-        <a>정보수정</a>
+        <h3>정보수정</h3>
         <br />
 
         <InfoSetting />

@@ -1,10 +1,11 @@
 import React from 'react';
 import LoginBox from '../components/molecules/loginBox';
 
-const Signin = () => {
+const Signin = ({ history }) => {
+  console.log(history);
   return (
     <div>
-      <LoginBox />
+      <LoginBox props={{ history }} />
     </div>
   );
 };

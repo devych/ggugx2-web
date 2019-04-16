@@ -3,9 +3,9 @@ import React from 'react';
 const SubNavBar = () => {
   return (
     <span>
-      <a>정보수정</a>
-      <a>메뉴수정</a>
-      <a>이벤트관리</a>
+      <h3>정보수정</h3>
+      <h3>메뉴수정</h3>
+      <h3>이벤트관리</h3>
     </span>
   );
 };

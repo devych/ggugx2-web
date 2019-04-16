@@ -5,7 +5,7 @@ import CafeMenuAdd from '../../molecules/cafeMenuAdd';
 const CafeMenuEdit = () => {
   return (
     <span>
-      <a>메뉴</a> <a>가격</a>
+      <h3>메뉴</h3> <h3>가격</h3>
       <CafeMenuEntry />
       <br />
       <CafeMenuAdd />
