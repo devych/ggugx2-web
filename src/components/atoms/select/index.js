@@ -24,9 +24,13 @@ const Select = ({
     >
       {option
         ? option.map(item => (
-            <Option value={item.value} children={item.children} />
+            <Option
+              value={item.value}
+              children={item.children}
+              key={item.value}
+            />
           ))
-        : '1'}
+        : null}
     </select>
   );
 };

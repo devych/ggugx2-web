@@ -1,10 +1,10 @@
 import React from 'react';
 import RegisterBox from '../components/molecules/RegisterBox';
 
-const Signup = () => {
+const Signup = ({ history }) => {
   return (
     <div>
-      <RegisterBox />
+      <RegisterBox props={history} />
     </div>
   );
 };
