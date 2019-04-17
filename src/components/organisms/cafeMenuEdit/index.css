@@ -1,0 +1,7 @@
+.cafeMenu {
+  display: table;
+  grid-area: b;
+  align-content: center;
+  margin: 0 0 5px 5px;
+  padding: 3px;
+}

@@ -1,18 +1,11 @@
 import React from 'react';
-import MainNavBar from '../components/molecules/mainNavBar/index';
-import PhoneSearchList from '../components/molecules/phoneSearchList/index';
-import ContentsList from '../components/organisms/contentsList/index';
-
+import { checkValidJwt, jwtToken } from '../modules/checkValidJwt';
+import MainPage from '../components/organisms/mainPage';
+console.log(jwtToken);
+console.log(checkValidJwt(jwtToken));
 const Mainpage = () => {
-  return (
-    <div>
-      <h1>MainPage</h1>
-
-      <MainNavBar />
-      <PhoneSearchList />
-      <ContentsList />
-    </div>
-  );
+  //TODO: 이거 코드 나중에 다시 확인해야함. checkValidJwt가 계속 false 뱉음
+  return <div>{checkValidJwt(jwtToken) ? <MainPage /> : <MainPage />}</div>;
 };
 
 export default Mainpage;

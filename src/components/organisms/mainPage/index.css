@@ -1,0 +1,45 @@
+.MainPage {
+  margin: 0 5px;
+  border-color: chocolate;
+  border-style: solid;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 50px;
+  grid-template-areas:
+    '. . .'
+    'a b b'
+    'a b b'
+    'a b b'
+    'a b b'
+    '. . .';
+  justify-items: center;
+  padding-inline-start: 0px;
+  height: 100%;
+}
+
+.phoneSearchBox {
+  grid-area: a;
+  border-color: chocolate;
+  border-style: solid;
+  align-content: center;
+  margin: 0 0 20px 5px;
+  padding: 3px;
+  height: 100%;
+}
+.phoneSearch ul {
+  padding-inline-start: 15px;
+}
+
+.phoneSearchBox input {
+  margin: 10px 10px 0px 15px;
+  height: 20px;
+  border-color: chocolate;
+  border-style: solid;
+}
+
+.contentsBox {
+  grid-area: b;
+  align-content: center;
+  margin: 0 0 5px 5px;
+  padding: 3px;
+}

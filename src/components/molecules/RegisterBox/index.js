@@ -67,7 +67,6 @@ class RegisterBox extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <span className="registerBox">
         <span className="bigTitle">
