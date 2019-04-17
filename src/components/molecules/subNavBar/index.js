@@ -1,11 +1,16 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const SubNavBar = () => {
   return (
-    <span>
-      <h3>정보수정</h3>
-      <h3>메뉴수정</h3>
-      <h3>이벤트관리</h3>
+    <span className="subNav">
+      <NavLink to="/ShopMng/Caffeinfo" className="subItem">
+        정보수정
+      </NavLink>
+      <NavLink to="/ShopMng/Caffemenu" className="subItem">
+        메뉴수정
+      </NavLink>
+      <NavLink className="subItem">이벤트관리</NavLink>
     </span>
   );
 };

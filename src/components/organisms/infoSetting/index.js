@@ -12,7 +12,7 @@ const option = [
 ];
 const InfoSetting = () => {
   return (
-    <span>
+    <span className="infoSetBox">
       <span>
         <ImageBox />
       </span>

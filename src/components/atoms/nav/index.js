@@ -17,7 +17,11 @@ const Nav = () => {
       <NavLink to="/Statistic" className="item">
         통계
       </NavLink>
-      {sessionStorage.getItem('token') ? null : (
+      {sessionStorage.getItem('token') ? (
+        <NavLink to="/Signin" className="item" style={{ display: 'none' }}>
+          Signin
+        </NavLink>
+      ) : (
         <NavLink to="/Signin" className="item">
           Signin
         </NavLink>

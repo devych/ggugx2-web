@@ -1,0 +1,87 @@
+.subNav {
+  background: blueviolet;
+  display: table;
+  table-layout: fixed;
+  right: 0px;
+  width: 50%;
+  height: 15%;
+}
+
+.subItem {
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: table-cell;
+  color: white;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+
+.subItem:hover {
+  background: rgb(149, 70, 223);
+}
+
+.subItem:active {
+  background: white;
+  color: blueviolet;
+}
+
+.shopMng {
+  margin: 0 5px;
+  border-color: chocolate;
+  border-style: solid;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  grid-template-areas:
+    '. s s'
+    'a b b'
+    'a b b'
+    '. . .';
+  justify-items: center;
+  padding-inline-start: 0px;
+  height: 100%;
+}
+.subNav {
+  grid-area: s;
+}
+.phoneSearchBox {
+  grid-area: a;
+  border-color: chocolate;
+  border-style: solid;
+  align-content: center;
+  margin: 0 0 20px 5px;
+  padding: 3px;
+  height: auto;
+}
+.phoneSearch ul {
+  padding-inline-start: 15px;
+}
+
+.phoneSearchBox input {
+  margin: 10px 10px 0px 15px;
+  height: 20px;
+  border-color: chocolate;
+  border-style: solid;
+}
+
+.infoSetBox {
+  grid-area: b;
+  align-content: center;
+  margin: 0 0 5px 5px;
+  padding: 3px;
+}
+
+.caffeInfo {
+  grid-area: b;
+  align-content: center;
+  margin: 0 0 5px 5px;
+  padding: 3px;
+}
+
+.caffeMenu {
+  grid-area: b;
+  align-content: center;
+  margin: 0 0 5px 5px;
+  padding: 3px;
+}

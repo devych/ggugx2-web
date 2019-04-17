@@ -1,5 +1,4 @@
 import React from 'react';
-import MainNavBar from '../../molecules/mainNavBar';
 import PhoneSearchList from '../../molecules/phoneSearchList';
 import ContentsList from '../contentsList';
 import './index.css';
