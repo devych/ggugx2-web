@@ -1,0 +1,32 @@
+{
+  "customers": [
+    { "id": 1, "customer_id":273, "phone": "010-2938-2394", "name": "개코", "stamps": "27", "rewards": "3" },
+    { "id": 2, "customer_id":3,"phone": "010-4738-2394", "name": "우편함", "stamps": "3", "rewards": "1" },
+    { "id": 3, "customer_id":94,"phone": "010-9584-3973", "name": "레몬물", "stamps": "8", "rewards": "0" },
+    { "id": 4, "customer_id":196,"phone": "010-1562-1092", "name": "시리얼", "stamps": "13", "rewards": "9" },
+    { "id": 5, "customer_id":1,"phone": "010-5673-0293", "name": "첵스초", "stamps": "0", "rewards": "0" }
+  ],
+  "storeinfos": [
+    { "id": 1, "store_id":1 , "name": "fafi caffe", "phone": "010-3843-3925", "address": "서울시 성동구 아차산로 68", "openhour":"09:00", "closehour":"22:00", "stamp":"10","dayoff":"목,금" ,
+      "menu":["아아","뜨아","아카","뜨카","버블티","자몽티","오줌"], 
+      "url":["https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"]},
+    { "id": 2, "store_id":28 , "name": "gain", "phone": "010-4673-0596", "address": "서울시 성동구 아차산로 69", "openhour":"10:00", "closehour":"24:00", "stamp":"10","dayoff":"토",
+      "menu":["아아","뜨아","아카","뜨카","버블티","자몽티","응가"], 
+      "url":["https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80","https://images.unsplash.com/photo-1462539405390-d0bdb635c7d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1393&q=80","https://images.unsplash.com/photo-1494346480775-936a9f0d0877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1406&q=80"]},
+    { "id": 3, "store_id":937 , "name": "commu", "phone": "010-5968-2731", "address": "서울시 성동구 아차산로 71", "openhour":"00:00", "closehour":"24:00", "stamp":"10","dayoff": null,
+      "menu":["아아","뜨아","아카","뜨카","버블티","자몽티","응가"], 
+      "url":["https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80","https://images.unsplash.com/photo-1462539405390-d0bdb635c7d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1393&q=80","https://images.unsplash.com/photo-1494346480775-936a9f0d0877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1406&q=80"]}
+  ],
+  "menus": [
+    { "id": 1, "store_id": 1, "name": "fafi caffe", 
+      "menu":[
+        {"아이스아메리카노": "3000원"},{"뜨거운아메리카노": "3000원"},{"뜨거운카페라떼": "5000원"},{"아이스카페라떼": "9000원"},{"버블티":"100000원"},{"자몽티":"1원"},{"오줌":"99999999원"}]},
+    { "id": 2, "store_id": 28, "name": "gain", 
+      "menu":[
+        {"아이스아메리카노": "3000원"},{"뜨거운아메리카노": "3000원"},{"뜨거운카페라떼": "5000원"},{"아이스카페라떼": "9000원"},{"버블티":"100000원"},{"자몽티":"1원"},{"오줌":"99999999원"}]},
+    { "id": 3, "store_id": 937, "name": "commu", 
+      "menu":[
+        {"아이스아메리카노": "3000원"},{"뜨거운아메리카노": "3000원"},{"뜨거운카페라떼": "5000원"},{"아이스카페라떼": "9000원"},{"버블티":"100000원"},{"자몽티":"1원"},{"오줌":"99999999원"}]}
+  ]
+}
+
