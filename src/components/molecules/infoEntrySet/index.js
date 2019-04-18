@@ -4,10 +4,15 @@ import Button from '../../atoms/button/index';
 
 const InfoEntrySet = ({ label, className, placeholder, children }) => {
   return (
-    <ul>
-      {label} <Input placeholder={placeholder} className={className} />{' '}
-      <Button children={children} />
-    </ul>
+    <tr>
+      <td>{label}</td>{' '}
+      <td>
+        <Input placeholder={placeholder} className={className} />
+      </td>
+      <td>
+        <Button children={children} />
+      </td>
+    </tr>
   );
 };
 

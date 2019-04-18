@@ -16,6 +16,10 @@ class LoginBox extends Component {
 
   userLogin() {
     let token;
+    if (sessionStorage.getItem('token')) {
+      console.log('already token exist');
+      sessionStorage.removeItem('token');
+    }
     axios
       .post(
         'http://ec2-13-115-51-251.ap-northeast-1.compute.amazonaws.com:3000/users/signin',

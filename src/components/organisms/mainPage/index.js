@@ -1,23 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
 import PhoneSearchList from '../../molecules/phoneSearchList';
 import ContentsList from '../contentsList';
 import './index.css';
 
-const phoneEntry = [
-  { phoneNumber: '010-8381-3829' },
-  { phoneNumber: '010-8374-3829' },
-  { phoneNumber: '010-3715-3829' },
-  { phoneNumber: '010-2938-3829' }
-];
+class mainPage extends Component {
+  constructor(props) {
+    super(props);
 
-const mainPage = () => {
-  return (
-    <div className="MainPage">
-      <h1>MainPage</h1>
-      <PhoneSearchList phoneEntry={phoneEntry} className="PhoneSearchList" />
-      <ContentsList />
-    </div>
-  );
-};
+    axios
+      .get('http://localhost:3333/customers')
+      .then(res => {
+        // console.log('TCL: mainPage -> constructor -> res', res);
+        // console.log(res.data);
+        this.setState({ data: res.data });
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+
+    this.state = {
+      phone: null,
+      data: null,
+      correctPhoneList: null
+    };
+  }
+
+  onHandleChange(e) {
+    this.setState({ phone: e.target.value }, () => {
+      var list = this.state.data.filter(
+        item => item.phone.slice(-4) === String(this.state.phone)
+      );
+      this.setState({ correctPhoneList: list });
+    });
+  }
+
+  render() {
+    return (
+      <div className="MainPage">
+        <h1>MainPage</h1>
+        <PhoneSearchList
+          phoneList={this.state.correctPhoneList}
+          className="PhoneSearchList"
+          onChange={e => this.onHandleChange(e)}
+        />
+        <ContentsList />
+      </div>
+    );
+  }
+}
 
 export default mainPage;

@@ -6,7 +6,6 @@ const Caffeinfo = () => {
     <div className="caffeInfo">
       <span>
         <h3>정보수정</h3>
-        <br />
         <InfoSetting />
       </span>
     </div>
