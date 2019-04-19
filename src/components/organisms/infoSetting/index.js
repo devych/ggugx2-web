@@ -7,11 +7,6 @@ import Button from '../../atoms/button/index';
 import Select from '../../atoms/select/index';
 import Input from '../../atoms/input/index';
 
-const option = [
-  { value: '아아', children: '아이스아메리카노' },
-  { value: '뜨아', children: '뜨거운아메리카노' },
-  { value: '미아', children: '미지근한아메리카노' }
-];
 class InfoSetting extends Component {
   constructor(props) {
     super(props);
@@ -82,10 +77,23 @@ class InfoSetting extends Component {
             children={'등록'}
           />
         </table>
-        <table>
-          <Select option={this.state.store.menu} key={this.state.store.menu} />
-          <Input placeholder={'쿠폰갯수'} />
-          <Button children={'등록'} />
+        <table className="stampsSet">
+          <tbody>
+            <rt>
+              <td>
+                <Select
+                  option={this.state.store.menu}
+                  key={this.state.store.menu}
+                />
+              </td>
+              <td>
+                <Input placeholder={'쿠폰갯수'} />
+              </td>
+              <td>
+                <Button children={'등록'} />
+              </td>
+            </rt>
+          </tbody>
         </table>
       </span>
     );
