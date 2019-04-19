@@ -33,15 +33,16 @@ class LoginBox extends Component {
         token = res.data.token;
         sessionStorage.setItem('token', token);
         alert('로그인 되었습니다.');
-        this.props.props.history.push('/MainPage');
+        this.props.history.history.push('/MainPage');
       })
       .catch(err => {
-        console.log(err.response.data);
+        console.log(err);
         alert('ID 또는 비밀번호를 다시 확인해주세요.');
       });
   }
 
   render() {
+    console.log(this.props.history);
     return (
       <span className="loginBox">
         <span className="bigTitle">

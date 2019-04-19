@@ -4,7 +4,7 @@ import LoginBox from '../components/molecules/loginBox';
 const Signin = ({ history }) => {
   return (
     <div>
-      <LoginBox props={{ history }} />
+      <LoginBox history={{ history }} />
     </div>
   );
 };

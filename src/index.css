@@ -12,3 +12,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.StampsRewards {
+  margin: 0 5px;
+  border-color: chocolate;
+  border-style: solid;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  grid-template-areas:
+    '. x s'
+    'q a b'
+    'q a b'
+    '. . .';
+  justify-items: center;
+  padding-inline-start: 0px;
+  height: 100%;
+}
+
+.etcSpace {
+  grid-area: q;
+  box-shadow: 1px 1px 1px 1px gray;
+  background-color: #748ffc;
+  width: 100%;
+}
+.Rewards {
+  box-shadow: 1px 1px 1px 1px gray;
+  grid-area: b;
+  /* border-style: dashed; */
+  font-size: 1.25rem;
+  height: 20em;
+}
+
+.Stamps {
+  font-size: 1.25rem;
+  grid-area: a;
+  box-shadow: 1px 1px 1px 1px gray;
+  height: 20em;
+}

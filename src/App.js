@@ -8,6 +8,7 @@ import Caffeinfo from './pages/Caffeinfo';
 import Caffemenu from './pages/Caffemenu';
 import Nav from './components/atoms/nav';
 import ShopMng from './components/organisms/shopMng';
+import StampsRewards from './pages/StampsRewards';
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
           <Route exact path="/" component={Signin} />
           <Switch>
             <Route path="/Mainpage" component={Mainpage} />
+            <Route path="/StampsRewards" component={StampsRewards} />
             <Route path="/ShopMng" component={ShopMng} />
             <Route path="/Caffeinfo" component={Caffeinfo} />
             <Route path="/Caffemenu" component={Caffemenu} />
