@@ -15,7 +15,7 @@ const checkValidJwt = token => {
       //TODO: 이게 트루 리턴하게 하고 에러는 펄시한 값 리턴하게 만들어야함
     })
     .catch(err => {
-      console.log('fail', err.response);
+      console.log('fail', err.response.data.message);
     });
 };
 

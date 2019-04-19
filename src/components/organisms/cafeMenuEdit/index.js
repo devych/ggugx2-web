@@ -44,8 +44,8 @@ class CafeMenuEdit extends Component {
             <th>가격</th>
             <th>수정버튼</th>
           </tr>
-          {this.state.menu &&
-            this.state.menu.map(item => (
+          {menu &&
+            menu.map(item => (
               <CafeMenuEntry itemName={item.name} price={item.price} />
             ))}
           <CafeMenuAdd />

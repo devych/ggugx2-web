@@ -8,6 +8,9 @@ const Nav = () => {
       <NavLink to="/MainPage" className="item">
         Main
       </NavLink>
+      <NavLink to="/StampsRewards" className="item">
+        적립관리
+      </NavLink>
       <NavLink to="/CustomerMng" className="item">
         고객관리
       </NavLink>
