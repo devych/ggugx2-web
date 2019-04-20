@@ -3,6 +3,10 @@ import io from 'socket.io-client';
 import Button from '../components/atoms/button/index';
 // import RealTimeSetStamps from '../modules/RealTimeSetStamps';
 
+// const socket = io(
+//   'http://ec2-13-115-51-251.ap-northeast-1.compute.amazonaws.com:3000'
+// );
+
 const socket = io('http://localhost:4000');
 
 class StampsRewards extends Component {
@@ -11,7 +15,7 @@ class StampsRewards extends Component {
 
     this.state = {
       storeId: 28,
-      storeName: 'gain',
+      storeName: 0,
       messages: [],
       msg: [],
       exmsg: [],
@@ -19,20 +23,17 @@ class StampsRewards extends Component {
       identification: [],
       identifyNum: 0
     };
-    // connectSocket(this.state.storeName);
+
     this.RealTimeSetStamps(this.state.storeName);
   }
 
   connectSocket(storeId) {
-    console.log('connecting socket');
     let userinfo = { id: storeId };
     socket.emit('register', userinfo);
   }
 
   stampConfirm(e) {
     e.preventDefault();
-    console.log(e);
-    console.log(this.state.msg.customer);
     socket.emit('stamp confirm from store', {
       store: this.state.storeId,
       customer: this.state.msg[0].customer,
@@ -90,7 +91,6 @@ class StampsRewards extends Component {
     const { storeName, messages } = this.state;
     return (
       <div className="StampsRewards">
-        {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js" /> */}
         <div className="etcSpace">빈 공간</div>
         <div className="Stamps">
           <h3 id="id-header">{storeName} 쿠폰 적립 요청 리스트</h3>
