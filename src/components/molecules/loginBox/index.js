@@ -33,7 +33,7 @@ class LoginBox extends Component {
         token = res.data.token;
         sessionStorage.setItem('token', token);
         alert('로그인 되었습니다.');
-        this.props.history.history.push('/MainPage');
+        this.props.history.push('/MainPage');
       })
       .catch(err => {
         console.log(err);
@@ -73,7 +73,7 @@ class LoginBox extends Component {
         </span>
         <span className="loginRegiButton">
           <Button onClick={() => this.userLogin()}> Login </Button>
-          <Button onClick={() => this.props.props.history.push('/Signup')}>
+          <Button onClick={() => this.props.history.push('/Signup')}>
             Register
           </Button>
         </span>
