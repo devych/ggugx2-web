@@ -14,8 +14,6 @@ class shopMng extends Component {
     axios
       .get('http://localhost:3333/customers')
       .then(res => {
-        console.log('TCL: mainPage -> constructor -> res', res);
-        // console.log(res.data);
         this.setState({ data: res.data });
       })
       .catch(err => {
