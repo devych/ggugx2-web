@@ -11,8 +11,6 @@ class mainPage extends Component {
     axios
       .get('http://localhost:3333/customers')
       .then(res => {
-        // console.log('TCL: mainPage -> constructor -> res', res);
-        // console.log(res.data);
         this.setState({ data: res.data });
       })
       .catch(err => {
@@ -28,9 +26,11 @@ class mainPage extends Component {
 
   onHandleChange(e) {
     this.setState({ phone: e.target.value }, () => {
-      var list = this.state.data.filter(
-        item => item.phone.slice(-4) === String(this.state.phone)
-      );
+      var list =
+        this.state.data &&
+        this.state.data.filter(
+          item => item.phone.slice(-4) === String(this.state.phone)
+        );
       this.setState({ correctPhoneList: list });
     });
   }

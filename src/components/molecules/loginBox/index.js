@@ -23,7 +23,7 @@ class LoginBox extends Component {
     axios
       .post(
         'http://ec2-13-115-51-251.ap-northeast-1.compute.amazonaws.com:3000/users/signin',
-        // 'http://localhost:3001/users//signin',
+        // 'http://localhost:3001/users/signin',
         {
           phone: this.state.phone,
           password: this.state.password
@@ -42,7 +42,6 @@ class LoginBox extends Component {
   }
 
   render() {
-    console.log(this.props.history);
     return (
       <span className="loginBox">
         <span className="bigTitle">

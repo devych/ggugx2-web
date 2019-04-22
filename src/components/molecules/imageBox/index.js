@@ -2,8 +2,6 @@ import React from 'react';
 import Image from '../../atoms/image/index';
 
 const ImageBox = ({ imgs }) => {
-  console.log('TCL: ImageBox -> imgs', imgs);
-
   return (
     <span>
       {imgs.map(img => (

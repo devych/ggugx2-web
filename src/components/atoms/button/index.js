@@ -1,9 +1,10 @@
 import React from 'react';
 import './index.css';
 
-const Button = ({ type, onClick, disabled, className, children }) => {
+const Button = ({ id, type, onClick, disabled, className, children }) => {
   return (
     <button
+      id={id}
       type={type}
       onClick={onClick}
       disabled={disabled}
