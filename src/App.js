@@ -22,7 +22,7 @@ class App extends Component {
     super(props);
     this.state = {
       loginInfo: null,
-      storeId: 1,
+      storeId: null,
       stampsUseReq: [],
       rewardsUseReq: [],
       reqErr: []
@@ -171,7 +171,7 @@ class App extends Component {
       window.scrollTo(0, document.body.scrollHeight);
     });
   };
-  //TODO: 아직 버그가 많습니다. 더 고칩시다.
+
   componentDidMount() {
     this.connectSocket(this.state.storeId);
   }

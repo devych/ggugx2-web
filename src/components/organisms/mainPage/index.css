@@ -30,9 +30,14 @@
   padding-inline-start: 15px;
 }
 
+.phoneListTr {
+  height: 2rem;
+}
+
 .phoneSearchBox input {
   margin: 10px 10px 0px 15px;
   height: 20px;
+  width: 10rem;
   border-color: chocolate;
   border-style: solid;
 }

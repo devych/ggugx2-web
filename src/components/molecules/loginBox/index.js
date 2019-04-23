@@ -22,7 +22,7 @@ class LoginBox extends Component {
     }
     axios
       .post(
-        'http://ec2-13-115-51-251.ap-northeast-1.compute.amazonaws.com:3000/users/signin',
+        'http://ec2-13-115-51-251.ap-northeast-1.compute.amazonaws.com:3000/stores/signin',
         // 'http://localhost:3001/users/signin',
         {
           phone: this.state.phone,
