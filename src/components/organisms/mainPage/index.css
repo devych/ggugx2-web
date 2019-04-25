@@ -26,12 +26,9 @@
   padding: 3px;
   height: 100%;
 }
-.phoneSearch ul {
-  padding-inline-start: 15px;
-}
 
-.phoneListTr {
-  height: 2rem;
+.phoneSearch tr {
+  height: 2em;
 }
 
 .phoneSearchBox input {

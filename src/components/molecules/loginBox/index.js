@@ -1,6 +1,7 @@
 /* eslint-disable func-style */
 import React, { Component } from 'react';
 import axios from 'axios';
+import serverUrl from '../../../../src/serverInfo';
 import Input from '../../atoms/input/index';
 import Button from '../../atoms/button/index';
 import './index.css';
@@ -16,13 +17,14 @@ class LoginBox extends Component {
 
   userLogin() {
     let token;
+    let storeId;
     if (sessionStorage.getItem('token')) {
-      console.log('already token exist');
       sessionStorage.removeItem('token');
+      sessionStorage.removeItem('storeId');
     }
     axios
       .post(
-        'http://ec2-13-115-51-251.ap-northeast-1.compute.amazonaws.com:3000/stores/signin',
+        `${serverUrl}/stores/signin`,
         // 'http://localhost:3001/users/signin',
         {
           phone: this.state.phone,
@@ -31,6 +33,8 @@ class LoginBox extends Component {
       )
       .then(res => {
         token = res.data.token;
+        storeId = res.data.storeid;
+        sessionStorage.setItem('storeId', storeId);
         sessionStorage.setItem('token', token);
         alert('로그인 되었습니다.');
         this.props.history.push('/MainPage');

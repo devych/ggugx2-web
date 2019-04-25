@@ -2,25 +2,25 @@
   "customers": [
     {
       "id": 1,
-      "customer_id": 273,
-      "phone": "010-2938-2394",
-      "name": "개코",
+      "customer_id": 1,
+      "phone": "010-7676-6479",
+      "name": "Mckimmm",
       "stamps": "27",
       "rewards": "3"
     },
     {
       "id": 2,
-      "customer_id": 3,
-      "phone": "010-4738-2394",
-      "name": "우편함",
+      "customer_id": 2,
+      "phone": "010-7676-7676",
+      "name": "Floyd",
       "stamps": "3",
       "rewards": "1"
     },
     {
       "id": 3,
-      "customer_id": 94,
-      "phone": "010-9584-3973",
-      "name": "레몬물",
+      "customer_id": 3,
+      "phone": "010-1111-1111",
+      "name": "Mingki",
       "stamps": "8",
       "rewards": "0"
     },

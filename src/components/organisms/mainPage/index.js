@@ -3,6 +3,7 @@ import axios from 'axios';
 import PhoneSearchList from '../../molecules/phoneSearchList';
 import ContentsList from '../contentsList';
 import './index.css';
+import serverUrl from '../../../serverInfo';
 
 class mainPage extends Component {
   constructor(props) {
@@ -11,7 +12,9 @@ class mainPage extends Component {
     axios
       .get('http://localhost:3333/customers')
       .then(res => {
-        this.setState({ data: res.data });
+        this.setState({ data: res.data }, () => {
+          console.log(this.state.data);
+        });
       })
       .catch(err => {
         console.log(err.response);
