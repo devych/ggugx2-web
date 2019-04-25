@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import io from 'socket.io-client';
+import serverUrl from './serverInfo';
 import impAxiosDefault from '../src/modules/impAxiosDefault';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
@@ -13,9 +14,7 @@ import StampsRewards from './pages/StampsRewards';
 
 // const socket = io('http://localhost:4000');
 
-const socket = io(
-  'http://ec2-13-115-51-251.ap-northeast-1.compute.amazonaws.com:3000'
-);
+const socket = io(`${serverUrl}`);
 
 class App extends Component {
   constructor(props) {
@@ -37,6 +36,18 @@ class App extends Component {
     socket.emit('register', userinfo);
   }
 
+  getIndex(arr, event) {
+    let index;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].key === event.target.id) {
+        index = i;
+      }
+    }
+    return index > -1
+      ? arr.splice(index, 1)
+      : new Error('키가 올바르지 않습니다.');
+  }
+
   stampConfirm(e) {
     e.preventDefault();
     let stampReqListArr = JSON.parse(JSON.stringify(this.state.stampsUseReq));
@@ -48,19 +59,7 @@ class App extends Component {
       confirm: true
     });
 
-    const getIndex = () => {
-      let index;
-      for (let i = 0; i < stampReqListArr.length; i++) {
-        if (stampReqListArr[i].key === e.target.id) {
-          index = i;
-        }
-      }
-      return index > -1
-        ? stampReqListArr.splice(index, 1)
-        : new Error('키가 올바르지 않습니다.');
-    };
-
-    getIndex();
+    this.getIndex(stampReqListArr, e);
     this.setState({ stampsUseReq: stampReqListArr });
   }
 
@@ -76,19 +75,7 @@ class App extends Component {
       confirm: true
     });
 
-    const getIndex = () => {
-      let index;
-      for (let i = 0; i < rewardReqListArr.length; i++) {
-        if (rewardReqListArr[i].key === e.target.id) {
-          index = i;
-        }
-      }
-      return index > -1
-        ? rewardReqListArr.splice(index, 1)
-        : new Error('키가 올바르지 않습니다.');
-    };
-
-    getIndex();
+    this.getIndex(rewardReqListArr, e);
     this.setState({ rewardsUseReq: rewardReqListArr });
   }
 
@@ -171,7 +158,7 @@ class App extends Component {
       window.scrollTo(0, document.body.scrollHeight);
     });
   };
-  //TODO: 아직 버그가 많습니다. 더 고칩시다.
+
   componentDidMount() {
     this.connectSocket(this.state.storeId);
   }
@@ -185,8 +172,8 @@ class App extends Component {
           <Switch>
             <Route path="/Mainpage" component={Mainpage} />
             <Route
-              path="/StampsRewards"
-              render={(stampsUseReq, rewardsUseReq) => (
+              path="/StampsRewards/"
+              render={() => (
                 <StampsRewards
                   stampsUseReq={this.state.stampsUseReq}
                   rewardsUseReq={this.state.rewardsUseReq}

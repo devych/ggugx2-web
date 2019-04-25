@@ -39,16 +39,22 @@ class CafeMenuEdit extends Component {
     return (
       <span className="cafeMenu">
         <table className="cafeMenuSet">
-          <tr>
-            <th>메뉴</th>
-            <th>가격</th>
-            <th>수정버튼</th>
-          </tr>
-          {menu &&
-            menu.map(item => (
-              <CafeMenuEntry itemName={item.name} price={item.price} />
-            ))}
-          <CafeMenuAdd />
+          <tbody>
+            <tr>
+              <th>메뉴</th>
+              <th>가격</th>
+              <th>수정버튼</th>
+            </tr>
+            {menu &&
+              menu.map(item => (
+                <CafeMenuEntry
+                  itemName={item.name}
+                  price={item.price}
+                  key={item.name}
+                />
+              ))}
+            <CafeMenuAdd />
+          </tbody>
         </table>
       </span>
     );

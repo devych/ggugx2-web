@@ -26,13 +26,15 @@
   padding: 3px;
   height: 100%;
 }
-.phoneSearch ul {
-  padding-inline-start: 15px;
+
+.phoneSearch tr {
+  height: 2em;
 }
 
 .phoneSearchBox input {
   margin: 10px 10px 0px 15px;
   height: 20px;
+  width: 10rem;
   border-color: chocolate;
   border-style: solid;
 }

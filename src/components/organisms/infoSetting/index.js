@@ -79,7 +79,7 @@ class InfoSetting extends Component {
         </table>
         <table className="stampsSet">
           <tbody>
-            <rt>
+            <tr>
               <td>
                 <Select
                   option={this.state.store.menu}
@@ -92,7 +92,7 @@ class InfoSetting extends Component {
               <td>
                 <Button children={'등록'} />
               </td>
-            </rt>
+            </tr>
           </tbody>
         </table>
       </span>

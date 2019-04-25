@@ -22,6 +22,7 @@ class StampsRewards extends Component {
       stampConfirm,
       rewardConfirm
     } = this.props;
+
     console.log(this.props);
     return (
       <div className="StampsRewards">
