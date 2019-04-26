@@ -47,6 +47,8 @@ class RegisterBox extends Component {
       phone: null,
       password: null,
       address: null,
+      lattitude: null,
+      longitude: null,
       openHour: null,
       closeHour: null,
       stamp: null,
@@ -77,27 +79,19 @@ class RegisterBox extends Component {
   }
 
   handleOpenAddrSearchModal() {
-    this.setState({ addrSearchModal: true }, () => {
-      console.log('OpenAddrSearchModal');
-    });
+    this.setState({ addrSearchModal: true });
   }
 
   handleCloseAddrSearchModal() {
-    this.setState({ addrSearchModal: false }, () => {
-      console.log('CloseAddrSearchModal');
-    });
+    this.setState({ addrSearchModal: false });
   }
 
   handleOpenShowAddrListModal() {
-    this.setState({ showAddrListModal: true }, () => {
-      console.log('OpenShowAddrListModal');
-    });
+    this.setState({ showAddrListModal: true });
   }
 
   handleCloseShowAddrListModal() {
-    this.setState({ showAddrListModal: false }, () => {
-      console.log('CloseShowAddrListModal');
-    });
+    this.setState({ showAddrListModal: false });
   }
 
   userRegister() {
@@ -107,6 +101,8 @@ class RegisterBox extends Component {
       password,
       address,
       selectedLocal,
+      lattitude,
+      longitude,
       openHour,
       closeHour,
       stamp,
@@ -120,6 +116,8 @@ class RegisterBox extends Component {
         storename: cafeTitle,
         password: password,
         address: joinAddress,
+        lattitude: lattitude,
+        longitude: longitude,
         openhour: openHour,
         closehour: closeHour,
         stamp: stamp,
@@ -137,16 +135,13 @@ class RegisterBox extends Component {
   }
 
   getLocalName(e) {
-    this.setState({ inputLocal: e.target.value }, () => {
-      console.log(this.state.inputLocal);
-    });
+    this.setState({ inputLocal: e.target.value });
   }
 
   async searchRealAddress() {
     this.handleCloseAddrSearchModal();
     let localName = this.state.inputLocal;
     this.setState({ localList: [] });
-    console.log('TCL: searchRealAddress -> localName', localName);
 
     try {
       let res = await axios.get(
@@ -165,9 +160,13 @@ class RegisterBox extends Component {
   }
 
   setLocalNameToState(e) {
-    console.log(e.target.id);
-    this.setState({ selectedLocal: e.target.id }, () => {
-      console.log(this.state.selectedLocal);
+    let getXYPoint = this.state.localList.filter(
+      local => local.address_name === e.target.id
+    );
+    this.setState({
+      selectedLocal: e.target.id,
+      lattitude: getXYPoint[0].y,
+      longitude: getXYPoint[0].x
     });
     this.handleCloseShowAddrListModal();
   }
@@ -184,20 +183,9 @@ class RegisterBox extends Component {
             onDay.push(week[key].kor);
           }
         }
-        console.log(onDay);
-        this.setState({ dayOff: this.state.dayOff.concat(onDay) }, () => {
-          console.log(this.state.dayOff);
-        });
+        this.setState({ dayOff: this.state.dayOff.concat(onDay) });
       }
     );
-    if (this.state[e.target.id]) {
-      console.log(e.target.id, 'canceled');
-    } else {
-      console.log(e.target.id);
-    }
-
-    // 'mon','tues','wed','thurs','fri','sat','sun'
-    //'월', '화', '수', '목', '금', '토', '일'
   }
 
   setCafeTitleInputToState(e) {
@@ -284,12 +272,6 @@ class RegisterBox extends Component {
             className="Stamp"
             onChange={e => this.setStampInputToState(e)}
           />
-
-          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
-          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
-          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
-          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
-          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
           <tr className="registerLabel">
             <th className="label">DayOff</th>
             <td className="registerInput">
@@ -303,12 +285,6 @@ class RegisterBox extends Component {
               ))}
             </td>
           </tr>
-          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
-          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
-          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
-          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
-          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
-
           <tr colSpan="2" className="registerLabel">
             <th>
               <Button

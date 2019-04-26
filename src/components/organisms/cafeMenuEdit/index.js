@@ -21,9 +21,7 @@ class CafeMenuEdit extends Component {
         var thisMenu = res.data.filter(
           item => item.store_id === this.state.storeId
         );
-        this.setState({ menu: thisMenu[0].menu }, () =>
-          console.log(this.state.menu)
-        );
+        this.setState({ menu: thisMenu[0].menu });
       })
       .catch(err => {
         console.log(err.response);

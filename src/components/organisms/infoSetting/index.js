@@ -22,9 +22,7 @@ class InfoSetting extends Component {
         var thisStore = res.data.filter(
           item => item.store_id === this.state.storeId
         );
-        this.setState({ store: thisStore[0] }, () =>
-          console.log(this.state.store)
-        );
+        this.setState({ store: thisStore[0] });
       })
       .catch(err => {
         console.log(err.response);
