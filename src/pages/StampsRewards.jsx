@@ -9,9 +9,8 @@ import StampsReqList from '../components/molecules/stampsReqList';
 class StampsRewards extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
-      storeId: 28,
+      storeId: sessionStorage.getItem('storeId'),
       storeName: 1
     };
   }
@@ -23,7 +22,6 @@ class StampsRewards extends Component {
       rewardConfirm
     } = this.props;
 
-    console.log(this.props);
     return (
       <div className="StampsRewards">
         <div className="Stamps">
