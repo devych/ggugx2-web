@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import mapConfig from '../../../config/config';
 import serverUrl from '../../../serverInfo';
 import RegisterLabel from '../RegisterLabel/index';
 import Button from '../../atoms/button/index';
@@ -21,6 +22,16 @@ const customStyles = {
   }
 };
 
+const week = [
+  { kor: '월', eng: 'mon' },
+  { kor: '화', eng: 'tues' },
+  { kor: '수', eng: 'wed' },
+  { kor: '목', eng: 'thurs' },
+  { kor: '금', eng: 'fri' },
+  { kor: '토', eng: 'sat' },
+  { kor: '일', eng: 'sun' }
+];
+
 Modal.setAppElement('#root');
 
 class RegisterBox extends Component {
@@ -39,8 +50,16 @@ class RegisterBox extends Component {
       openHour: null,
       closeHour: null,
       stamp: null,
-      dayOff: null
+      dayOff: [],
+      mon: false,
+      tues: false,
+      wed: false,
+      thurs: false,
+      fri: false,
+      sat: false,
+      sun: false
     };
+
     this.handleOpenAddrSearchModal = this.handleOpenAddrSearchModal.bind(this);
     this.handleCloseAddrSearchModal = this.handleCloseAddrSearchModal.bind(
       this
@@ -54,6 +73,7 @@ class RegisterBox extends Component {
     this.getLocalName = this.getLocalName.bind(this);
     this.searchRealAddress = this.searchRealAddress.bind(this);
     this.setLocalNameToState = this.setLocalNameToState.bind(this);
+    this.handleChangeChk = this.handleChangeChk.bind(this);
   }
 
   handleOpenAddrSearchModal() {
@@ -86,7 +106,6 @@ class RegisterBox extends Component {
       cafeTitle,
       password,
       address,
-      inputLocal,
       selectedLocal,
       openHour,
       closeHour,
@@ -94,8 +113,6 @@ class RegisterBox extends Component {
       dayOff
     } = this.state;
     let joinAddress = `${selectedLocal} ${address}`;
-
-    console.log(joinAddress);
 
     axios
       .post(`${serverUrl}/stores/signup`, {
@@ -106,7 +123,7 @@ class RegisterBox extends Component {
         openhour: openHour,
         closehour: closeHour,
         stamp: stamp,
-        dayoff: dayOff
+        dayoff: dayOff.join()
       })
       .then(res => {
         console.log(res);
@@ -125,33 +142,26 @@ class RegisterBox extends Component {
     });
   }
 
-  searchRealAddress() {
+  async searchRealAddress() {
     this.handleCloseAddrSearchModal();
     let localName = this.state.inputLocal;
     this.setState({ localList: [] });
     console.log('TCL: searchRealAddress -> localName', localName);
 
-    axios
-      .get(
+    try {
+      let res = await axios.get(
         `https://dapi.kakao.com/v2/local/search/address.json?query=${localName}&size=30`,
-        {
-          headers: {
-            Authorization: 'KakaoAK ec8f46a785c5931b0b6694fc0eafec7f',
-            accept: 'application/json',
-            'Content-Type': 'application/json;charset=UTF-8'
-          }
-        }
-      )
-      .then(res => {
-        console.log('res', res);
-        this.setState(
-          { localList: this.state.localList.concat(res.data.documents) },
-          this.handleOpenShowAddrListModal
-        );
-      })
-      .catch(err => {
-        console.log(err.response);
-      });
+        mapConfig
+      );
+
+      console.log('res', res);
+      this.setState(
+        { localList: this.state.localList.concat(res.data.documents) },
+        this.handleOpenShowAddrListModal
+      );
+    } catch (err) {
+      console.log(err.response);
+    }
   }
 
   setLocalNameToState(e) {
@@ -160,6 +170,34 @@ class RegisterBox extends Component {
       console.log(this.state.selectedLocal);
     });
     this.handleCloseShowAddrListModal();
+  }
+
+  handleChangeChk(e) {
+    let onDay = [];
+    this.setState(
+      { [e.target.id]: !this.state[e.target.id], dayOff: [] },
+      () => {
+        const { mon, tues, wed, thurs, fri, sat, sun } = this.state;
+        const day = [mon, tues, wed, thurs, fri, sat, sun];
+        for (let key in day) {
+          if (day[key] === true) {
+            onDay.push(week[key].kor);
+          }
+        }
+        console.log(onDay);
+        this.setState({ dayOff: this.state.dayOff.concat(onDay) }, () => {
+          console.log(this.state.dayOff);
+        });
+      }
+    );
+    if (this.state[e.target.id]) {
+      console.log(e.target.id, 'canceled');
+    } else {
+      console.log(e.target.id);
+    }
+
+    // 'mon','tues','wed','thurs','fri','sat','sun'
+    //'월', '화', '수', '목', '금', '토', '일'
   }
 
   setCafeTitleInputToState(e) {
@@ -216,6 +254,7 @@ class RegisterBox extends Component {
             className="Address"
             value={selectedLocal}
             readOnly={'readOnly'}
+            placeholder={'주소찾기 버튼을 클릭하세요'}
             subInput={
               <Input
                 className="Address"
@@ -245,24 +284,45 @@ class RegisterBox extends Component {
             className="Stamp"
             onChange={e => this.setStampInputToState(e)}
           />
-          <RegisterLabel
-            label="DayOff"
-            className="DayOff"
-            type="date"
-            onChange={e => this.setDayOffInputToState(e)}
-          />
-          <Weekday mon={'월'} children={'월'} />
-          {/*//TODO:이부분 다시 싹다 정리해야함 <span className="registerButton"> */}
-          <Button
-            className="registerButton"
-            onClick={() => this.userRegister()}
-          >
-            Submit
-          </Button>
+
+          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
+          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
+          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
+          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
+          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
+          <tr className="registerLabel">
+            <th className="label">DayOff</th>
+            <td className="registerInput">
+              {week.map(day => (
+                <Weekday
+                  label={day.kor}
+                  id={day.eng}
+                  defaultChecked={this.state[day.eng]}
+                  onChange={e => this.handleChangeChk(e)}
+                />
+              ))}
+            </td>
+          </tr>
+          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
+          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
+          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
+          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
+          {/* {TODO:이곳은 Weekday를 넣는 곳입니다.} */}
+
+          <tr colSpan="2" className="registerLabel">
+            <th>
+              <Button
+                className="registerButton"
+                onClick={() => this.userRegister()}
+              >
+                Submit
+              </Button>
+            </th>
+          </tr>
         </tbody>
         <Modal isOpen={this.state.addrSearchModal} style={customStyles}>
           <Input
-            placeholder={'읍,면,동을 입력해주세요.'}
+            placeholder={'읍,면,동 또는 도로명 주소를 입력해주세요.'}
             onChange={this.getLocalName}
           />
           <Button onClick={this.searchRealAddress}>찾기</Button>
@@ -278,6 +338,7 @@ class RegisterBox extends Component {
                     <Button
                       id={local.address_name}
                       children={local.address_name}
+                      onClick={this.setLocalNameToState.bind(this)}
                       onClick={e => this.setLocalNameToState(e)}
                     />
                   </tr>
