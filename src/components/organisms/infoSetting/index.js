@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import serverUrl from '../../../serverInfo';
 import './index.css';
 import ImageBox from '../../molecules/imageBox/index';
 import InfoEntrySet from '../../molecules/infoEntrySet/index';
@@ -11,18 +12,34 @@ class InfoSetting extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      storeId: 28,
-      store: null
+      storeId: sessionStorage.getItem('storeId'),
+      store: null,
+      menu: null
     };
   }
   componentDidMount() {
     axios
-      .get('http://localhost:3333/storeinfos')
+      .post(`${serverUrl}/stores/get-store-info`, {
+        storeID: this.state.storeId
+      })
       .then(res => {
-        var thisStore = res.data.filter(
-          item => item.store_id === this.state.storeId
-        );
-        this.setState({ store: thisStore[0] });
+        console.log(res);
+        var thisStore = res.data;
+        console.log(thisStore);
+        this.setState({ store: thisStore });
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+
+    axios
+      .post(`${serverUrl}/stores/menu-list`, {
+        storeID: this.state.storeId
+      })
+      .then(res => {
+        var thisMenu = res.data;
+        console.log(thisMenu);
+        this.setState({ menu: thisMenu });
       })
       .catch(err => {
         console.log(err.response);
@@ -35,18 +52,18 @@ class InfoSetting extends Component {
     }
     return (
       <span className="infoSetBox">
-        <span>
+        {/* <span>
           <ImageBox imgs={this.state.store.url} />
-        </span>
+        </span> */}
         <table className="infoList">
-          <InfoEntrySet
+          {/* <InfoEntrySet
             label={'가게이름'}
             placeholder={this.state.store.name}
             children={'등록'}
-          />
+          /> */}
           <InfoEntrySet
             label={'전화번호'}
-            placeholder={this.state.store.phone}
+            placeholder={this.state.store.contact}
             children={'등록'}
           />
           <InfoEntrySet
@@ -69,20 +86,17 @@ class InfoSetting extends Component {
             placeholder={this.state.store.dayoff}
             children={'등록'}
           />
-          <InfoEntrySet
+          {/* <InfoEntrySet
             label={'기본쿠폰개수'}
             placeholder={this.state.store.stamp}
             children={'등록'}
-          />
+          /> */}
         </table>
         <table className="stampsSet">
           <tbody>
             <tr>
               <td>
-                <Select
-                  option={this.state.store.menu}
-                  key={this.state.store.menu}
-                />
+                <Select option={this.state.menu} key={this.state.menu} />
               </td>
               <td>
                 <Input placeholder={'쿠폰갯수'} />

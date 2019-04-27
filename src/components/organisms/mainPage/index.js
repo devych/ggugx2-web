@@ -10,7 +10,7 @@ class mainPage extends Component {
     super(props);
 
     axios
-      .get('http://localhost:3333/customers')
+      .get(`${serverUrl}/customers/getAll`)
       .then(res => {
         this.setState({ data: res.data });
       })

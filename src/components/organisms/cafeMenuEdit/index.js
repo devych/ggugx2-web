@@ -3,25 +3,25 @@ import axios from 'axios';
 import CafeMenuEntry from '../../molecules/cafeMenuEntry';
 import CafeMenuAdd from '../../molecules/cafeMenuAdd';
 import './index.css';
-
+import serverUrl from '../../../serverInfo';
 class CafeMenuEdit extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      storeId: 28,
+      storeId: sessionStorage.getItem('storeId'),
       menu: null
     };
   }
 
   componentDidMount() {
     axios
-      .get('http://localhost:3333/menus')
+      .post(`${serverUrl}/stores/menu-list`, {
+        storeID: this.state.storeId
+      })
       .then(res => {
-        var thisMenu = res.data.filter(
-          item => item.store_id === this.state.storeId
-        );
-        this.setState({ menu: thisMenu[0].menu });
+        var thisMenu = res.data;
+        this.setState({ menu: thisMenu });
       })
       .catch(err => {
         console.log(err.response);

@@ -108,7 +108,8 @@ class RegisterBox extends Component {
       stamp,
       dayOff
     } = this.state;
-    let joinAddress = `${selectedLocal} ${address}`;
+
+    let joinAddress = `${selectedLocal} ${address ? address : ''}`;
 
     axios
       .post(`${serverUrl}/stores/signup`, {
