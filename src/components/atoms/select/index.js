@@ -23,7 +23,9 @@ const Select = ({
       onChange={onChange}
     >
       {option
-        ? option.map(item => <Option value={item} children={item} key={item} />)
+        ? option.map(item => (
+            <Option value={item.name} children={item.name} key={item.name} />
+          ))
         : null}
     </select>
   );

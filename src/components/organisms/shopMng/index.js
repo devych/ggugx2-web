@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
+import serverUrl from '../../../serverInfo';
 import './index.css';
 import SubNavBar from '../../molecules/subNavBar';
 import PhoneSearchList from '../../molecules/phoneSearchList';
@@ -12,7 +13,7 @@ class shopMng extends Component {
     super(props);
 
     axios
-      .get('http://localhost:3333/customers')
+      .get(`${serverUrl}/customers/getAll`)
       .then(res => {
         this.setState({ data: res.data });
       })

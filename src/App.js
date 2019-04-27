@@ -21,7 +21,7 @@ class App extends Component {
     super(props);
     this.state = {
       loginInfo: null,
-      storeId: 1,
+      storeId: sessionStorage.getItem('storeId') || null,
       stampsUseReq: [],
       rewardsUseReq: [],
       reqErr: []

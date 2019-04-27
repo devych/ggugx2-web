@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import Input from '../../atoms/input/index';
 import Button from '../../atoms/button/index';
-import Axios from 'axios';
+import axios from 'axios';
 import serverUrl from '../../../serverInfo';
 
 const customStyles = {
@@ -49,11 +49,14 @@ class phoneSearchList extends Component {
     let filteredCustomerInfo = deepCpCustomerInfo.filter(
       customer => customer.phone === e.target.id
     );
+    console.log(filteredCustomerInfo[0].id);
+    console.log(sessionStorage.getItem('storeId'));
 
-    Axios.post(`${serverUrl}/customers/get-stamps-rewards-counts`, {
-      customerID: filteredCustomerInfo[0].id,
-      storeID: sessionStorage.getItem('storeId')
-    })
+    axios
+      .post(`${serverUrl}/customers/get-stamps-rewards-counts`, {
+        customerID: filteredCustomerInfo[0].id,
+        storeID: sessionStorage.getItem('storeId')
+      })
       .then(res => {
         this.setState(
           {
@@ -73,15 +76,17 @@ class phoneSearchList extends Component {
   }
 
   addStamps() {
-    Axios.post(`${serverUrl}/stamps/add`, {
-      customerID: this.state.customerId,
-      storeID: this.state.storeId
-    }).then(res => {
-      console.log(res);
-      if (this.state.showModal) {
-        this.handleCloseModal();
-      }
-    });
+    axios
+      .post(`${serverUrl}/stamps/add`, {
+        customerID: this.state.customerId,
+        storeID: this.state.storeId
+      })
+      .then(res => {
+        console.log(res);
+        if (this.state.showModal) {
+          this.handleCloseModal();
+        }
+      });
   }
   render() {
     const { phoneList, onChange } = this.props;
