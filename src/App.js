@@ -15,13 +15,6 @@ import StampsRewards from './pages/StampsRewards';
 
 const socket = io(`${serverUrl}`);
 
-toast.configure({
-  autoClose: 300000,
-  draggable: false,
-  position: 'bottom-right'
-  //etc you get the idea
-});
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -199,10 +192,10 @@ class App extends Component {
     toast(
       <div>
         <div>
-          `[stamp confirm] {msg.customer} 고객님이 교환권 사용을 요청했습니다!`
+          [stamp confirm] {msg.customer} 고객님이 교환권 사용을 요청했습니다!
         </div>
         <button id={key} onClick={this.rewardConfirm}>
-          사용하기
+          허락하기
         </button>
       </div>
     );
@@ -233,7 +226,12 @@ class App extends Component {
             <Route path="/Signin" component={Signin} />
             <Route path="/Signup" component={Signup} />
           </Switch>
-          <ToastContainer />
+          <ToastContainer
+            className="toast"
+            autoClose={30000}
+            position={'bottom-right'}
+            hideProgressBar={true}
+          />
         </div>
       </Router>
     );

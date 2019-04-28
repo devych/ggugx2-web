@@ -3,19 +3,30 @@ import './index.css';
 import Input from '../../atoms/input/index';
 import Button from '../../atoms/button/index';
 
-const InfoEntrySet = ({ label, className, placeholder, children }) => {
+const InfoEntrySet = ({
+  label,
+  className,
+  placeholder,
+  children,
+  value,
+  onClick,
+  onChange
+}) => {
   return (
-    <tbody>
-      <tr>
-        <td>{label}</td>
-        <td className="infoInput">
-          <Input placeholder={placeholder} className={className} />
-        </td>
-        <td>
-          <Button children={children} />
-        </td>
-      </tr>
-    </tbody>
+    <tr>
+      <td>{label}</td>
+      <td className="infoInput">
+        <Input
+          placeholder={placeholder}
+          className={className}
+          value={value}
+          onChange={onChange}
+        />
+      </td>
+      <td>
+        <Button children={children} onClick={onClick} />
+      </td>
+    </tr>
   );
 };
 
