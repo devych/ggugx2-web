@@ -34,6 +34,12 @@ class CafeMenuAdd extends Component {
         alert('메뉴가 추가되었습니다.');
         console.log(res);
       })
+      .then(() => {
+        this.props.checkUpdateMenu();
+      })
+      .then(() => {
+        this.setState({ name: '', price: '' });
+      })
       .catch(err => {
         alert('메뉴가 정상적으로 추가되지 않았습니다.');
         console.log(err);

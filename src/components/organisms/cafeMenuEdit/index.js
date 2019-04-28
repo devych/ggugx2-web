@@ -15,6 +15,10 @@ class CafeMenuEdit extends Component {
   }
 
   componentDidMount() {
+    this.checkUpdateMenu();
+  }
+
+  checkUpdateMenu = () => {
     axios
       .post(`${serverUrl}/stores/menu-list`, {
         storeID: this.state.storeId
@@ -26,7 +30,7 @@ class CafeMenuEdit extends Component {
       .catch(err => {
         console.log(err.response);
       });
-  }
+  };
 
   render() {
     const { menu } = this.state;
@@ -51,7 +55,7 @@ class CafeMenuEdit extends Component {
                   key={item.name}
                 />
               ))}
-            <CafeMenuAdd />
+            <CafeMenuAdd checkUpdateMenu={this.checkUpdateMenu} />
           </tbody>
         </table>
       </span>
