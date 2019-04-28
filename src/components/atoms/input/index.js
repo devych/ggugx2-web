@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 
 const Input = ({
   type,
@@ -10,7 +11,8 @@ const Input = ({
   placeholder,
   readOnly,
   value,
-  onChange
+  onChange,
+  className
 }) => {
   return (
     <input
@@ -24,6 +26,7 @@ const Input = ({
       readOnly={readOnly}
       value={value}
       onChange={onChange}
+      className={`Input ${className}`}
     />
   );
 };

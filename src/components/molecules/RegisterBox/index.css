@@ -8,15 +8,16 @@
   grid-template-areas:
     '. a .'
     '. b .'
-    '. . c';
+    '. c .';
   justify-items: center;
 }
 
 .bigTitle {
   grid-area: a;
-  align-content: center;
-  margin: 0 0 5px 5px;
-  padding: 3px;
+  margin-top: 10px;
+  margin-bottom: -10px;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .registerLabelList {
@@ -24,10 +25,10 @@
   align-content: center;
   margin: 0 0 5px 5px;
   padding: 3px;
+  /* width: 200px; */
 }
 .registerButton {
+  width: 300px;
   grid-area: c;
-  align-content: center;
-  margin: 0 0 5px 5px;
-  padding: 3px;
+  margin-bottom: 20px;
 }

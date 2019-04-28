@@ -25,8 +25,8 @@ const RegisterLabel = ({
           onChange={onChange}
           value={value}
         />
-        {subButton ? subButton : null}
         {subInput ? subInput : null}
+        {subButton ? subButton : null}
       </td>
     </tr>
   );

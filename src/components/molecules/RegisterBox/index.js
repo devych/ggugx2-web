@@ -218,63 +218,74 @@ class RegisterBox extends Component {
     const { selectedLocal } = this.state;
     return (
       <table className="registerBox">
-        <caption className="bigTitle">
-          <h2>회원가입</h2>
-        </caption>
+        <caption className="bigTitle">회원가입</caption>
         <tbody className="registerLabelList">
           <RegisterLabel
-            label="CafeTitle"
+            label="매장 이름"
             className="CafeTitle"
+            placeholder="매장 이름을 입력해주세요"
             onChange={e => this.setCafeTitleInputToState(e)}
           />
           <RegisterLabel
-            label="Phone"
+            label="전화번호"
             className="Phone"
+            placeholder="02-123-1234"
             onChange={e => this.setPhoneInputToState(e)}
           />
           <RegisterLabel
-            label="Password"
+            label="비밀번호"
+            placeholder="비밀번호를 입력해주세요"
             className="Password"
             type="password"
             onChange={e => this.setPasswordInputToState(e)}
           />
+          {/* 비밀번호 확인 기능 있으면 좋은데.. */}
           <RegisterLabel
-            label="Address"
+            label="매장 주소"
             className="Address"
             value={selectedLocal}
             readOnly={'readOnly'}
             placeholder={'주소찾기 버튼을 클릭하세요'}
             subInput={
               <Input
-                className="Address"
+                className="AddressInput"
                 placeholder={'상세주소를 입력해주세요.'}
                 onChange={e => this.setAddressInputToState(e)}
               />
             }
             subButton={
-              <Button onClick={this.handleOpenAddrSearchModal}>주소찾기</Button>
+              <Button
+                onClick={this.handleOpenAddrSearchModal}
+                className="findAddressButton"
+              >
+                주소찾기
+              </Button>
             }
           />
 
           <RegisterLabel
-            label="OpenHour"
+            label="오픈 시간"
             className="OpenHour"
             type="time"
             onChange={e => this.setOpenHourInputToState(e)}
           />
           <RegisterLabel
-            label="CloseHour"
+            label="마감 시간"
             className="CloseHour"
             type="time"
             onChange={e => this.setCloseHourInputToState(e)}
           />
           <RegisterLabel
-            label="Stamp"
+            label="스탬프 수"
             className="Stamp"
+            placeholder="교환에 필요한 스탬프 수를 입력해주세요"
             onChange={e => this.setStampInputToState(e)}
           />
-          <tr className="registerLabel">
-            <th className="label">DayOff</th>
+          <tr
+            className="registerLabel"
+            style={{ height: '20px', paddingTop: '8px' }}
+          >
+            <th className="label">휴무일</th>
             <td className="registerInput">
               {week.map(day => (
                 <Weekday
@@ -286,17 +297,20 @@ class RegisterBox extends Component {
               ))}
             </td>
           </tr>
-          <tr colSpan="2" className="registerLabel">
+          {/* <tr colSpan="2" className="registerLabel">
             <th>
               <Button
                 className="registerButton"
                 onClick={() => this.userRegister()}
               >
-                Submit
+                가입하기
               </Button>
             </th>
-          </tr>
+          </tr> */}
         </tbody>
+        <Button className="registerButton" onClick={() => this.userRegister()}>
+          가입하기
+        </Button>
         <Modal isOpen={this.state.addrSearchModal} style={customStyles}>
           <Input
             placeholder={'읍,면,동 또는 도로명 주소를 입력해주세요.'}

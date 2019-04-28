@@ -13,6 +13,7 @@ import Caffemenu from './pages/Caffemenu';
 import Nav from './components/atoms/nav';
 import ShopMng from './components/organisms/shopMng';
 import StampsRewards from './pages/StampsRewards';
+import axiosDefault from './modules/impAxiosDefault';
 
 const socket = io(`${serverUrl}`);
 // const socket = io(`http://localhost:3000`);

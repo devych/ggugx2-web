@@ -1,0 +1,28 @@
+.Input {
+  border: 1px solid rgb(205, 212, 217);
+  /* border-bottom: 1px solid gray; */
+  border-radius: 6px;
+  padding: 5px;
+  width: 200px;
+  height: 30px;
+  font-size: 17px;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #999;
+  opacity: 1; /* Firefox */
+  font-size: 17px;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #999;
+  font-size: 17px;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #999;
+  font-size: 17px;
+}
