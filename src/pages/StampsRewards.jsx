@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import StampsReqList from '../components/molecules/stampsReqList';
-// import RealTimeSetStamps from '../modules/RealTimeSetStamps';
-
-// const socket = io(
-//   'http://ec2-13-115-51-251.ap-northeast-1.compute.amazonaws.com:3000'
-// );
 
 class StampsRewards extends Component {
   constructor(props) {

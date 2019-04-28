@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import Button from '../../atoms/button';
 
 class StampsReqList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isVisible: true
-    };
-  }
-
   render() {
     const { req, onClick } = this.props;
 
