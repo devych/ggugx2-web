@@ -52,9 +52,7 @@ class InfoSetting extends Component {
     }
     return (
       <span className="infoSetBox">
-        {/* <span>
-          <ImageBox imgs={this.state.store.url} />
-        </span> */}
+        {/* <span>{<ImageBox imgs={this.state.store.url} />}</span> */}
         <table className="infoList">
           {/* <InfoEntrySet
             label={'가게이름'}
