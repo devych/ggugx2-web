@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import io from 'socket.io-client';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import serverUrl from './serverInfo';
-import impAxiosDefault from '../src/modules/impAxiosDefault';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Mainpage from './pages/Mainpage';
@@ -12,9 +13,14 @@ import Nav from './components/atoms/nav';
 import ShopMng from './components/organisms/shopMng';
 import StampsRewards from './pages/StampsRewards';
 
-// const socket = io('http://localhost:4000');
-
 const socket = io(`${serverUrl}`);
+
+toast.configure({
+  autoClose: 300000,
+  draggable: false,
+  position: 'bottom-right'
+  //etc you get the idea
+});
 
 class App extends Component {
   constructor(props) {
@@ -88,17 +94,24 @@ class App extends Component {
 
   RealTimeSetStamps = () => {
     socket.on('stamp confirm to store', msg => {
-      this.setState({
-        stampsUseReq: this.state.stampsUseReq.concat({
-          customer: msg.customer,
-          type: 'stampRequest',
-          message: `[stamp confirm] ${
-            msg.customer
-          } 고객님이 쿠폰 적립을 요청했습니다!`,
-          key: `${msg.customer}${this.getTime()}`,
-          time: this.getTime(1)
-        })
-      });
+      let key = `${msg.customer}${new Date().getTime()}`;
+      this.setState(
+        {
+          stampsUseReq: this.state.stampsUseReq.concat({
+            customer: msg.customer,
+            type: 'stampRequest',
+            message: `[stamp confirm] ${
+              msg.customer
+            } 고객님이 쿠폰 적립을 요청했습니다!`,
+            key: `${msg.customer}${new Date().getTime()}`,
+            time: this.getTime(1)
+          })
+        },
+        () => {
+          this.stampsUseNotify(msg, key);
+        }
+      );
+
       window.scrollTo(0, document.body.scrollHeight);
     });
 
@@ -108,7 +121,7 @@ class App extends Component {
           customer: msg.customer,
           type: 'stampAdd',
           message: `[complete] ${msg.customer} 고객님의 적립이 완료되었습니다.`,
-          key: `${msg.customer}${this.getTime()}`,
+          key: `${msg.customer}${new Date().getTime()}`,
           time: this.getTime(1)
         })
       });
@@ -116,16 +129,22 @@ class App extends Component {
     });
 
     socket.on('reward confirm to store', msg => {
+      let key = `${msg.customer}${new Date().getTime()}`;
       this.setState({
-        rewardsUseReq: this.state.rewardsUseReq.concat({
-          customer: msg.customer,
-          type: 'rewardUseRequest',
-          message: `[stamp confirm] ${
-            msg.customer
-          } 고객님이 교환권 사용을 요청했습니다!`,
-          key: `${msg.customer}${this.getTime()}`,
-          time: this.getTime(1)
-        })
+        rewardsUseReq: this.state.rewardsUseReq.concat(
+          {
+            customer: msg.customer,
+            type: 'rewardUseRequest',
+            message: `[stamp confirm] ${
+              msg.customer
+            } 고객님이 교환권 사용을 요청했습니다!`,
+            key: `${msg.customer}${new Date().getTime()}`,
+            time: this.getTime(1)
+          },
+          () => {
+            this.rewardsUseNotify(msg, key);
+          }
+        )
       });
       window.scrollTo(0, document.body.scrollHeight);
     });
@@ -138,7 +157,7 @@ class App extends Component {
           message: `[reward use complete] ${
             msg.customer
           } 고객님의 교환권 사용이 완료되었습니다.`,
-          key: `${msg.customer}${this.getTime()}`,
+          key: `${msg.customer}${new Date().getTime()}`,
           time: this.getTime(1)
         })
       });
@@ -151,7 +170,7 @@ class App extends Component {
           customer: msg.customer,
           type: 'error',
           message: `[error] ${msg.message}`,
-          key: `${msg.customer}${this.getTime()}`,
+          key: `${msg.customer}${new Date().getTime()}`,
           time: this.getTime(1)
         })
       });
@@ -162,6 +181,32 @@ class App extends Component {
   componentDidMount() {
     this.connectSocket(this.state.storeId);
   }
+
+  stampsUseNotify = (msg, key) => {
+    toast(
+      <div>
+        <div>
+          [stamp confirm] {msg.customer} 고객님이 쿠폰 적립을 요청했습니다!
+        </div>
+        <button id={key} onClick={this.stampConfirm}>
+          적립하기
+        </button>
+      </div>
+    );
+  };
+
+  rewardsUseNotify = (msg, key) => {
+    toast(
+      <div>
+        <div>
+          `[stamp confirm] {msg.customer} 고객님이 교환권 사용을 요청했습니다!`
+        </div>
+        <button id={key} onClick={this.rewardConfirm}>
+          사용하기
+        </button>
+      </div>
+    );
+  };
 
   render() {
     return (
@@ -188,6 +233,7 @@ class App extends Component {
             <Route path="/Signin" component={Signin} />
             <Route path="/Signup" component={Signup} />
           </Switch>
+          <ToastContainer />
         </div>
       </Router>
     );
