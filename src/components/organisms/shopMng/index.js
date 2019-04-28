@@ -1,42 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import axios from 'axios';
-import serverUrl from '../../../serverInfo';
-import './index.css';
 import SubNavBar from '../../molecules/subNavBar';
 import PhoneSearchList from '../../molecules/phoneSearchList';
 import Caffeinfo from '../../../pages/Caffeinfo';
 import Caffemenu from '../../../pages/Caffemenu';
+import './index.css';
 
 class shopMng extends Component {
   constructor(props) {
     super(props);
-
-    axios
-      .get(`${serverUrl}/customers/getAll`)
-      .then(res => {
-        this.setState({ data: res.data });
-      })
-      .catch(err => {
-        console.log(err.response);
-      });
-
-    this.state = {
-      phone: null,
-      data: null,
-      correctPhoneList: null
-    };
   }
-
-  onHandleChange(e) {
-    this.setState({ phone: e.target.value }, () => {
-      var list = this.state.data.filter(
-        item => item.phone.slice(-4) === String(this.state.phone)
-      );
-      this.setState({ correctPhoneList: list });
-    });
-  }
-
   render() {
     return (
       <div className="shopMng">
@@ -46,12 +19,7 @@ class shopMng extends Component {
           <Route path="/ShopMng/Caffeinfo" component={Caffeinfo} />
           <Route path="/ShopMng/Caffemenu" component={Caffemenu} />
         </Router>
-
-        <PhoneSearchList
-          phoneList={this.state.correctPhoneList}
-          className="PhoneSearchList"
-          onChange={e => this.onHandleChange(e)}
-        />
+        <PhoneSearchList className="PhoneSearchList" />
       </div>
     );
   }
