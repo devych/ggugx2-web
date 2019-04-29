@@ -16,6 +16,7 @@ class InfoSetting extends Component {
     this.state = {
       storeId: sessionStorage.getItem('storeId'),
       store: null,
+      imgUrl: null,
       menu: null,
       setStoreInfo: null
     };
@@ -26,10 +27,11 @@ class InfoSetting extends Component {
         storeID: this.state.storeId
       })
       .then(res => {
-        console.log(res);
         var thisStore = res.data;
         console.log(thisStore);
-        this.setState({ store: thisStore });
+        this.setState({ store: thisStore, imgUrl: thisStore.imgUrl }, () => {
+          console.log(this.state.imgUrl);
+        });
       })
       .catch(err => {
         console.log(err.response);
@@ -41,7 +43,6 @@ class InfoSetting extends Component {
       })
       .then(res => {
         var thisMenu = res.data;
-        console.log(thisMenu);
         this.setState({ menu: thisMenu });
       })
       .catch(err => {
@@ -55,7 +56,9 @@ class InfoSetting extends Component {
     }
     return (
       <span className="infoSetBox">
-        {/* <span>{<ImageBox imgs={this.state.store.url} />}</span> */}
+        <span>
+          {this.state.imgUrl ? <ImageBox imgs={this.state.imgUrl} /> : null}
+        </span>
         <table className="infoList">
           <tbody>
             {/* <InfoEntrySet
@@ -107,12 +110,14 @@ class InfoSetting extends Component {
             />
             <InfoEntrySet
               id="openhour"
+              type="time"
               label={'오픈시간'}
               placeholder={this.state.store.openhour}
               children={'수정'}
             />
             <InfoEntrySet
               id="closehour"
+              type="time"
               label={'종료시간'}
               placeholder={this.state.store.closehour}
               children={'수정'}

@@ -16,9 +16,6 @@ class LoginBox extends Component {
   }
 
   userLogin() {
-    let token;
-    let storeId;
-    let storeName;
     if (sessionStorage.getItem('token')) {
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('storeId');
@@ -35,17 +32,18 @@ class LoginBox extends Component {
       )
       .then(res => {
         console.log(res);
-        token = res.data.token;
-        storeId = res.data.storeid;
-        storeName = res.data.storename;
-        sessionStorage.setItem('storeId', storeId);
-        sessionStorage.setItem('storeName', storeName);
+        const { token, storeid, storename } = res.data;
+        sessionStorage.setItem('storeId', storeid);
+        sessionStorage.setItem('storeName', storename);
         sessionStorage.setItem('token', token);
+
         alert('로그인 되었습니다.');
+
         axios.defaults.headers.common[
           'Authorization'
         ] = `Bearer ${sessionStorage.getItem('token')}`;
-        this.props.history.push('/MainPage');
+
+        this.props.history.push('/StampsRewards');
       })
       .catch(err => {
         console.log(err);
