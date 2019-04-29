@@ -10,9 +10,9 @@ const SubNavBar = () => {
       <NavLink to="/ShopMng/Caffemenu" className="subItem">
         메뉴수정
       </NavLink>
-      <NavLink to="/event" className="subItem">
+      {/* <NavLink to="/event" className="subItem">
         이벤트관리
-      </NavLink>
+      </NavLink> */}
     </span>
   );
 };
