@@ -13,6 +13,7 @@ import Caffemenu from './pages/Caffemenu';
 import Nav from './components/atoms/nav';
 import ShopMng from './components/organisms/shopMng';
 import StampsRewards from './pages/StampsRewards';
+import Button from './components/atoms/button';
 
 const socket = io(`${serverUrl}`);
 // const socket = io(`http://localhost:3000`);
@@ -52,7 +53,9 @@ class App extends Component {
   stampConfirm(e) {
     e.preventDefault();
     let stampReqListArr = JSON.parse(JSON.stringify(this.state.stampsUseReq));
+    console.log('TCL: App -> stampConfirm -> stampReqListArr', stampReqListArr);
     let matchData = stampReqListArr.filter(item => item.key === e.target.id);
+    console.log('TCL: App -> stampConfirm -> matchData', matchData);
 
     socket.emit('stamp confirm from store', {
       store: this.state.storeId,
@@ -68,7 +71,12 @@ class App extends Component {
   rewardConfirm(e) {
     e.preventDefault();
     let rewardReqListArr = JSON.parse(JSON.stringify(this.state.rewardsUseReq));
+    console.log(
+      'TCL: App -> rewardConfirm -> rewardReqListArr',
+      rewardReqListArr
+    );
     let matchData = rewardReqListArr.filter(item => item.key === e.target.id);
+    console.log('TCL: App -> rewardConfirm -> matchData', matchData);
 
     socket.emit('reward confirm from store', {
       store: this.state.storeId,
@@ -128,10 +136,11 @@ class App extends Component {
     });
 
     socket.on('reward confirm to store', msg => {
+      console.log('reward confirm to store', msg);
       let key = `${msg.customer}${new Date().getTime()}`;
-      this.setState({
-        rewardsUseReq: this.state.rewardsUseReq.concat(
-          {
+      this.setState(
+        {
+          rewardsUseReq: this.state.rewardsUseReq.concat({
             customer: msg.customer,
             type: 'rewardUseRequest',
             message: `[stamp confirm] ${
@@ -139,16 +148,18 @@ class App extends Component {
             } 고객님이 교환권 사용을 요청했습니다!`,
             key: `${msg.customer}${new Date().getTime()}`,
             time: this.getTime(1)
-          },
-          () => {
-            this.rewardsUseNotify(msg, key);
-          }
-        )
-      });
+          })
+        },
+        () => {
+          console.log(this.state.rewardsUseReq);
+          this.rewardsUseNotify(msg, key);
+        }
+      );
       window.scrollTo(0, document.body.scrollHeight);
     });
 
     socket.on('reward use complete', msg => {
+      console.log('reward use complete', msg);
       this.setState({
         rewardsUseReq: this.state.rewardsUseReq.concat({
           customer: msg.customer,
@@ -163,18 +174,18 @@ class App extends Component {
       window.scrollTo(0, document.body.scrollHeight);
     });
 
-    socket.on('errors', msg => {
-      this.setState({
-        reqErr: this.state.reqErr.concat({
-          customer: msg.customer,
-          type: 'error',
-          message: `[error] ${msg.message}`,
-          key: `${msg.customer}${new Date().getTime()}`,
-          time: this.getTime(1)
-        })
-      });
-      window.scrollTo(0, document.body.scrollHeight);
-    });
+    // socket.on('errors', msg => {
+    //   this.setState({
+    //     reqErr: this.state.reqErr.concat({
+    //       customer: msg.customer,
+    //       type: 'error',
+    //       message: `[error] ${msg.message}`,
+    //       key: `${msg.customer}${new Date().getTime()}`,
+    //       time: this.getTime(1)
+    //     })
+    //   });
+    //   window.scrollTo(0, document.body.scrollHeight);
+    // });
   };
 
   componentDidMount() {
@@ -187,9 +198,9 @@ class App extends Component {
         <div>
           [stamp confirm] {msg.customerName} 고객님이 쿠폰 적립을 요청했습니다!
         </div>
-        <button id={key} onClick={this.stampConfirm}>
+        <Button id={key} onClick={this.stampConfirm}>
           적립하기
-        </button>
+        </Button>
       </div>
     );
   };
@@ -198,12 +209,12 @@ class App extends Component {
     toast(
       <div>
         <div>
-          [stamp confirm] {msg.customerName} 고객님이 교환권 사용을
+          [reward confirm] {msg.customerName} 고객님이 교환권 사용을
           요청했습니다!
         </div>
-        <button id={key} onClick={this.rewardConfirm}>
+        <Button id={key} onClick={this.rewardConfirm}>
           허락하기
-        </button>
+        </Button>
       </div>
     );
   };
@@ -235,9 +246,10 @@ class App extends Component {
           </Switch>
           <ToastContainer
             className="toast"
-            autoClose={30000}
+            draggable={false}
+            autoClose={5000}
             position={'bottom-right'}
-            hideProgressBar={true}
+            hideProgressBar={false}
           />
         </div>
       </Router>

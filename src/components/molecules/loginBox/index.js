@@ -18,6 +18,7 @@ class LoginBox extends Component {
   userLogin() {
     let token;
     let storeId;
+    let storeName;
     if (sessionStorage.getItem('token')) {
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('storeId');
@@ -35,7 +36,9 @@ class LoginBox extends Component {
         console.log(res);
         token = res.data.token;
         storeId = res.data.storeid;
+        storeName = res.data.storeName;
         sessionStorage.setItem('storeId', storeId);
+        sessionStorage.setItem('storeName', storeName);
         sessionStorage.setItem('token', token);
         alert('로그인 되었습니다.');
         axios.defaults.headers.common[
