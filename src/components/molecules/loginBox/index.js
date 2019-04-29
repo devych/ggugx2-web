@@ -25,7 +25,7 @@ class LoginBox extends Component {
     axios
       .post(
         `${serverUrl}/stores/signin`,
-        // 'http://localhost:3001/users/signin',
+        // 'http://localhost:3000/users/signin',
         {
           phone: this.state.phone,
           password: this.state.password

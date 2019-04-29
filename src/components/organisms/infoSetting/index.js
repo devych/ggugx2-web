@@ -62,35 +62,40 @@ class InfoSetting extends Component {
             children={'등록'}
           /> */}
             <tr>
-              <td>사진입력</td>
+              <td>사진업로드</td>
               <td>
                 <input type="data" />
               </td>
             </tr>
             <InfoEntrySet
+              id="phone"
               label={'전화번호'}
-              value={this.state.store.contact}
-              children={'등록'}
+              placeholder={this.state.store.contact}
+              children={'수정'}
             />
             <InfoEntrySet
+              id="address"
               label={'가게주소'}
-              value={this.state.store.address}
-              children={'등록'}
+              placeholder={this.state.store.address}
+              children={'수정'}
             />
             <InfoEntrySet
+              id="openhour"
               label={'오픈시간'}
-              value={this.state.store.openhour}
-              children={'등록'}
+              placeholder={this.state.store.openhour}
+              children={'수정'}
             />
             <InfoEntrySet
+              id="closehour"
               label={'종료시간'}
-              value={this.state.store.closehour}
-              children={'등록'}
+              placeholder={this.state.store.closehour}
+              children={'수정'}
             />
             <InfoEntrySet
+              id="dayoff"
               label={'휴무일'}
-              value={this.state.store.dayoff}
-              children={'등록'}
+              placeholder={this.state.store.dayoff}
+              children={'수정'}
             />
             {/* <InfoEntrySet
             label={'기본쿠폰개수'}

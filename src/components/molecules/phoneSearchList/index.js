@@ -62,13 +62,13 @@ class phoneSearchList extends Component {
     this.setState({ phone: e.target.value }, () => {
       if (this.state.phone.length > 3) {
         axios
-          .post('http://localhost:3000/customers/getAll', {
-            phone: this.state.phone
-          })
-          //TODO:서버로 올릴때 아래 url로 변경하여 올려야함
-          // .post(`${serverUrl}/customers/getAll`, {
+          // .post('http://localhost:3000/customers/getAll', {
           //   phone: this.state.phone
           // })
+          //TODO:서버로 올릴때 아래 url로 변경하여 올려야함
+          .post(`${serverUrl}/customers/getAll`, {
+            phone: this.state.phone
+          })
           .then(res => {
             this.setState({ correctPhoneList: res.data });
           })
@@ -87,12 +87,12 @@ class phoneSearchList extends Component {
 
   guestRegister = () => {
     axios
-      .post('http://localhost:3000/customers/signup', {
-        phone: this.state.registerPhone
-      })
-      // .post(`${serverUrl}/customers/signup`, {
+      // .post('http://localhost:3000/customers/signup', {
       //   phone: this.state.registerPhone
       // })
+      .post(`${serverUrl}/customers/signup`, {
+        phone: this.state.registerPhone
+      })
       .then(res => {
         alert('가입이 완료되었습니다.');
         this.handleCloseeRegisterModal();
