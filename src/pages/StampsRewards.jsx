@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StampsReqList from '../components/molecules/stampsReqList';
+import PhoneSearchList from '../components/molecules/phoneSearchList';
 
 class StampsRewards extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class StampsRewards extends Component {
     } = this.props;
     return (
       <div className="StampsRewards">
+        <PhoneSearchList className="PhoneSearchList" />
         <div className="Stamps">
           <h3 id="id-header">쿠폰 적립 리스트</h3>
           {stampsUseReq &&

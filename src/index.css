@@ -14,20 +14,25 @@ code {
 }
 
 .StampsRewards {
+  flex-direction: row;
+  flex-wrap: nowrap;
   margin: 0 5px;
-  border-color: chocolate;
-  border-style: solid;
+  border: 1px solid gray;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
   grid-template-areas:
-    '. x s .'
-    'a a b b'
-    'a a b b'
-    '. . . q';
+    '. x . s .'
+    'p a a b b'
+    'p a a b b'
+    '. . . . q';
   justify-items: center;
   padding-inline-start: 0px;
   height: 100%;
+}
+
+.phoneSearchBox {
+  grid-area: p;
 }
 
 .StampsRewards ul {
@@ -48,7 +53,7 @@ code {
   grid-area: a;
   box-shadow: 1px 1px 1px 1px gray;
   height: 20em;
-  width: 25em;
+  width: 100%;
   overflow: scroll;
 }
 
@@ -58,6 +63,6 @@ code {
   /* border-style: dashed; */
   font-size: 1.25rem;
   height: 20em;
-  width: 25em;
+  width: 100%;
   overflow: scroll;
 }

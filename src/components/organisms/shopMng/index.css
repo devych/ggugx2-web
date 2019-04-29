@@ -32,12 +32,12 @@
   border-color: chocolate;
   border-style: solid;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 2fr;
   grid-gap: 10px;
   grid-template-areas:
     '. s s'
-    'a b b'
-    'a b b'
+    'p b b'
+    'p b b'
     '. . .';
   justify-items: center;
   padding-inline-start: 0px;
@@ -45,7 +45,7 @@
 }
 
 .phoneSearchBox {
-  grid-area: a;
+  /* grid-area: a; */
   border-color: chocolate;
   border-style: solid;
   align-content: center;
