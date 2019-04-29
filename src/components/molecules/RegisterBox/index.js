@@ -127,7 +127,7 @@ class RegisterBox extends Component {
       .then(res => {
         console.log(res);
         alert('회원가입이 완료되었습니다.');
-        this.props.props.push('/MainPage');
+        this.props.props.push('/');
       })
       .catch(err => {
         console.log(err.response);

@@ -14,7 +14,8 @@ class InfoSetting extends Component {
     this.state = {
       storeId: sessionStorage.getItem('storeId'),
       store: null,
-      menu: null
+      menu: null,
+      setStoreInfo: null
     };
   }
   componentDidMount() {
@@ -54,41 +55,54 @@ class InfoSetting extends Component {
       <span className="infoSetBox">
         {/* <span>{<ImageBox imgs={this.state.store.url} />}</span> */}
         <table className="infoList">
-          {/* <InfoEntrySet
+          <tbody>
+            {/* <InfoEntrySet
             label={'가게이름'}
             placeholder={this.state.store.name}
             children={'등록'}
           /> */}
-          <InfoEntrySet
-            label={'전화번호'}
-            placeholder={this.state.store.contact}
-            children={'등록'}
-          />
-          <InfoEntrySet
-            label={'가게주소'}
-            placeholder={this.state.store.address}
-            children={'등록'}
-          />
-          <InfoEntrySet
-            label={'오픈시간'}
-            placeholder={this.state.store.openhour}
-            children={'등록'}
-          />
-          <InfoEntrySet
-            label={'종료시간'}
-            placeholder={this.state.store.closehour}
-            children={'등록'}
-          />
-          <InfoEntrySet
-            label={'휴무일'}
-            placeholder={this.state.store.dayoff}
-            children={'등록'}
-          />
-          {/* <InfoEntrySet
+            <tr>
+              <td>사진업로드</td>
+              <td>
+                <input type="data" />
+              </td>
+            </tr>
+            <InfoEntrySet
+              id="phone"
+              label={'전화번호'}
+              placeholder={this.state.store.contact}
+              children={'수정'}
+            />
+            <InfoEntrySet
+              id="address"
+              label={'가게주소'}
+              placeholder={this.state.store.address}
+              children={'수정'}
+            />
+            <InfoEntrySet
+              id="openhour"
+              label={'오픈시간'}
+              placeholder={this.state.store.openhour}
+              children={'수정'}
+            />
+            <InfoEntrySet
+              id="closehour"
+              label={'종료시간'}
+              placeholder={this.state.store.closehour}
+              children={'수정'}
+            />
+            <InfoEntrySet
+              id="dayoff"
+              label={'휴무일'}
+              placeholder={this.state.store.dayoff}
+              children={'수정'}
+            />
+            {/* <InfoEntrySet
             label={'기본쿠폰개수'}
             placeholder={this.state.store.stamp}
             children={'등록'}
           /> */}
+          </tbody>
         </table>
         <table className="stampsSet">
           <tbody>

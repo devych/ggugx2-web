@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import io from 'socket.io-client';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axiosDefault from './modules/impAxiosDefault';
 import serverUrl from './serverInfo';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
@@ -14,13 +15,7 @@ import ShopMng from './components/organisms/shopMng';
 import StampsRewards from './pages/StampsRewards';
 
 const socket = io(`${serverUrl}`);
-
-toast.configure({
-  autoClose: 300000,
-  draggable: false,
-  position: 'bottom-right'
-  //etc you get the idea
-});
+// const socket = io(`http://localhost:3000`);
 
 class App extends Component {
   constructor(props) {
@@ -94,6 +89,7 @@ class App extends Component {
 
   RealTimeSetStamps = () => {
     socket.on('stamp confirm to store', msg => {
+      console.log('stamp confirm to store', msg);
       let key = `${msg.customer}${new Date().getTime()}`;
       this.setState(
         {
@@ -101,7 +97,7 @@ class App extends Component {
             customer: msg.customer,
             type: 'stampRequest',
             message: `[stamp confirm] ${
-              msg.customer
+              msg.customerName
             } 고객님이 쿠폰 적립을 요청했습니다!`,
             key: `${msg.customer}${new Date().getTime()}`,
             time: this.getTime(1)
@@ -116,11 +112,14 @@ class App extends Component {
     });
 
     socket.on('stamp add complete', msg => {
+      console.log('stamp add complete', msg);
       this.setState({
         stampsUseReq: this.state.stampsUseReq.concat({
           customer: msg.customer,
           type: 'stampAdd',
-          message: `[complete] ${msg.customer} 고객님의 적립이 완료되었습니다.`,
+          message: `[complete] ${
+            msg.customerName
+          } 고객님의 적립이 완료되었습니다.`,
           key: `${msg.customer}${new Date().getTime()}`,
           time: this.getTime(1)
         })
@@ -136,7 +135,7 @@ class App extends Component {
             customer: msg.customer,
             type: 'rewardUseRequest',
             message: `[stamp confirm] ${
-              msg.customer
+              msg.customerName
             } 고객님이 교환권 사용을 요청했습니다!`,
             key: `${msg.customer}${new Date().getTime()}`,
             time: this.getTime(1)
@@ -155,7 +154,7 @@ class App extends Component {
           customer: msg.customer,
           type: 'rewardUseComplete',
           message: `[reward use complete] ${
-            msg.customer
+            msg.customerName
           } 고객님의 교환권 사용이 완료되었습니다.`,
           key: `${msg.customer}${new Date().getTime()}`,
           time: this.getTime(1)
@@ -186,7 +185,7 @@ class App extends Component {
     toast(
       <div>
         <div>
-          [stamp confirm] {msg.customer} 고객님이 쿠폰 적립을 요청했습니다!
+          [stamp confirm] {msg.customerName} 고객님이 쿠폰 적립을 요청했습니다!
         </div>
         <button id={key} onClick={this.stampConfirm}>
           적립하기
@@ -199,10 +198,11 @@ class App extends Component {
     toast(
       <div>
         <div>
-          `[stamp confirm] {msg.customer} 고객님이 교환권 사용을 요청했습니다!`
+          [stamp confirm] {msg.customerName} 고객님이 교환권 사용을
+          요청했습니다!
         </div>
         <button id={key} onClick={this.rewardConfirm}>
-          사용하기
+          허락하기
         </button>
       </div>
     );
@@ -233,7 +233,12 @@ class App extends Component {
             <Route path="/Signin" component={Signin} />
             <Route path="/Signup" component={Signup} />
           </Switch>
-          <ToastContainer />
+          <ToastContainer
+            className="toast"
+            autoClose={30000}
+            position={'bottom-right'}
+            hideProgressBar={true}
+          />
         </div>
       </Router>
     );
