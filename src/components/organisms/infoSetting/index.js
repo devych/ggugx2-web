@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../../../modules/impAxiosDefault';
 import serverUrl from '../../../serverInfo';
 import './index.css';
 import ImageBox from '../../molecules/imageBox/index';

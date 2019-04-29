@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './index.css';
 import Input from '../../atoms/input/index';
 import Button from '../../atoms/button/index';
-import axios from 'axios';
+import axios from '../../../modules/impAxiosDefault';
 import serverUrl from '../../../serverInfo';
 
 class InfoEntrySet extends Component {

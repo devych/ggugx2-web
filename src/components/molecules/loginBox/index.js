@@ -1,6 +1,6 @@
 /* eslint-disable func-style */
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../../../modules/impAxiosDefault';
 import serverUrl from '../../../../src/serverInfo';
 import Input from '../../atoms/input/index';
 import Button from '../../atoms/button/index';
@@ -32,11 +32,15 @@ class LoginBox extends Component {
         }
       )
       .then(res => {
+        console.log(res);
         token = res.data.token;
         storeId = res.data.storeid;
         sessionStorage.setItem('storeId', storeId);
         sessionStorage.setItem('token', token);
         alert('로그인 되었습니다.');
+        axios.defaults.headers.common[
+          'Authorization'
+        ] = `Bearer ${sessionStorage.getItem('token')}`;
         this.props.history.push('/MainPage');
       })
       .catch(err => {

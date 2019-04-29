@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../../../modules/impAxiosDefault';
 import mapConfig from '../../../config/config';
 import serverUrl from '../../../serverInfo';
 import RegisterLabel from '../RegisterLabel/index';
@@ -303,7 +303,7 @@ class RegisterBox extends Component {
             onChange={this.getLocalName}
           />
           <Button onClick={this.searchRealAddress}>찾기</Button>
-          <button onClick={this.handleCloseAddrSearchModal}>취소</button>
+          <Button onClick={this.handleCloseAddrSearchModal}>취소</Button>
         </Modal>
         <Modal isOpen={this.state.showAddrListModal} style={customStyles}>
           <table>

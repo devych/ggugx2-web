@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import io from 'socket.io-client';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axiosDefault from './modules/impAxiosDefault';
+import axios from './modules/impAxiosDefault';
 import serverUrl from './serverInfo';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';

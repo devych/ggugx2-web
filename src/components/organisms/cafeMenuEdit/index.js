@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../../../modules/impAxiosDefault';
 import CafeMenuEntry from '../../molecules/cafeMenuEntry';
 import CafeMenuAdd from '../../molecules/cafeMenuAdd';
 import './index.css';
