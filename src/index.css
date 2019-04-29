@@ -1,6 +1,8 @@
 body {
   margin: 0;
-  padding: 0;
+  padding: 20px;
+  padding-right: 40px;
+  padding-left: 40px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -13,21 +15,30 @@ code {
     monospace;
 }
 
+#appContainer {
+  box-shadow: 0px 4px 6px 0px #00000066;
+  min-width: 900px;
+}
+
 .StampsRewards {
-  margin: 0 5px;
-  border-color: chocolate;
-  border-style: solid;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  /* border: 1px solid gray; */
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1.8fr 1.8fr;
   grid-gap: 10px;
   grid-template-areas:
-    '. x s .'
-    'a a b b'
-    'a a b b'
-    '. . . q';
+    'p a b'
+    'p a b'
+    '. . q';
   justify-items: center;
   padding-inline-start: 0px;
   height: 100%;
+  padding-right: 15px;
+}
+
+.phoneSearchBox {
+  grid-area: p;
 }
 
 .StampsRewards ul {
@@ -46,18 +57,25 @@ code {
 .Stamps {
   font-size: 1.25rem;
   grid-area: a;
-  box-shadow: 1px 1px 1px 1px gray;
+  /* box-shadow: 1px 1px 1px 1px gray; */
   height: 20em;
-  width: 25em;
+  width: 100%;
   overflow: scroll;
+  border: 1px solid rgb(183, 191, 199);
+  border-radius: 4px;
+  margin-top: 9px;
 }
 
 .Rewards {
-  box-shadow: 1px 1px 1px 1px gray;
+  /* box-shadow: 1px 1px 1px 1px gray; */
   grid-area: b;
   /* border-style: dashed; */
   font-size: 1.25rem;
   height: 20em;
-  width: 25em;
+  width: 100%;
   overflow: scroll;
+  border: 1px solid rgb(183, 191, 199);
+  border-radius: 4px;
+  margin-top: 9px;
+  /* margin-right: 15px; */
 }

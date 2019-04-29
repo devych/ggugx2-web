@@ -6,6 +6,7 @@ import Input from '../../atoms/input/index';
 import Button from '../../atoms/button/index';
 import axios from '../../../modules/impAxiosDefault';
 import serverUrl from '../../../serverInfo';
+import './index.css';
 
 const customStyles = {
   content: {
@@ -14,7 +15,11 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
+    transform: 'translate(-50%, -50%)',
+    width: '230px',
+    textAlign: 'center',
+    paddingTop: '30px',
+    paddingBottom: '30px'
   }
 };
 
@@ -103,25 +108,26 @@ class phoneSearchList extends Component {
       });
   };
 
-  getCustomerInfo(e) {
-    let deepCpCustomerInfo = JSON.parse(
-      JSON.stringify(this.state.correctPhoneList)
-    );
-    let filteredCustomerInfo = deepCpCustomerInfo.filter(
-      customer => customer.phone === e.target.id
-    );
+  getCustomerInfo(e, id, phone) {
+    // let deepCpCustomerInfo = JSON.parse(
+    //   JSON.stringify(this.state.correctPhoneList)
+    // );
+    // let filteredCustomerInfo = deepCpCustomerInfo.filter(
+    //   customer => customer.phone === e.target.id
+    // );
 
     axios
       .post(`${serverUrl}/customers/get-stamps-rewards-counts`, {
-        customerID: filteredCustomerInfo[0].id,
+        // customerID: filteredCustomerInfo[0].id,
+        customerID: id,
         storeID: sessionStorage.getItem('storeId')
       })
       .then(res => {
         this.setState(
           {
             storeId: sessionStorage.getItem('storeId'),
-            customerId: filteredCustomerInfo[0].id,
-            customerPhone: filteredCustomerInfo[0].phone,
+            customerId: id,
+            customerPhone: phone,
             stamps: res.data.stamps,
             rewards: res.data.rewards
           },
@@ -151,62 +157,83 @@ class phoneSearchList extends Component {
     const { correctPhoneList } = this.state;
     return (
       <table className="phoneSearchBox">
-        <tbody>
-          <tr>
-            <td colSpan="2">
-              <Input
-                type="text"
-                placeholder="휴대폰 번호 뒤 네자리를 입력하세요"
-                onChange={e => this.onHandleChange(e)}
-              />
-            </td>
-          </tr>
-        </tbody>
-        <tbody className="phoneSearch">
+        <Modal isOpen={this.state.showModal} style={customStyles}>
+          <div className="flexColInModal">
+            <div className="flexRowInModal">
+              <div className="">스탬프</div>
+              <div>{this.state.stamps}개</div>
+            </div>
+            <div className="flexRowInModal">
+              <div className="">교환권</div>
+              <div>{this.state.rewards}개</div>
+            </div>
+          </div>
+          {/* <div>스탬프 수 : {this.state.stamps} 개</div>
+          <div>교환권 수 : {this.state.rewards} 개</div> */}
+          <Button onClick={this.addStamps} className="buttonInModal">
+            적립
+          </Button>
+          <Button onClick={this.handleCloseModal} className="buttonInModal">
+            취소
+          </Button>
+        </Modal>
+        <Input
+          type="text"
+          placeholder="휴대폰 뒷자리 검색"
+          onChange={e => this.onHandleChange(e)}
+          className="phoneSearchInput"
+        />
+        <div className="searchResult">
           {correctPhoneList && correctPhoneList.length !== 0 ? (
             correctPhoneList.map(item => (
-              <tr key={item.phone}>
-                <tr
-                  id={item.phone}
-                  onClick={e => {
-                    this.getCustomerInfo(e);
-                  }}
-                >
-                  <td id={item.phone}>
-                    {item.name ? `${item.name} 고객님` : '비회원 고객님'}
-                  </td>
-                  <td id={item.phone}>{item.phone}</td>
-                </tr>
-                <Modal
-                  isOpen={this.state.showModal}
-                  style={customStyles}
-                  key={item.phone}
-                >
-                  <div>쿠폰 개수 : {this.state.stamps} 개</div>
-                  <div>교환권 개수 : {this.state.rewards} 개</div>
-                  <Button onClick={this.addStamps}>적립</Button>
-                  <button onClick={this.handleCloseModal}>취소</button>
-                </Modal>
-              </tr>
+              <div
+                id={item.phone}
+                onClick={e => {
+                  this.getCustomerInfo(e, item.id, item.phone);
+                }}
+              >
+                <div id={item.phone} className="searchItem">
+                  <div style={{ fontSize: '20px', fontWeight: 'bold' }}>
+                    <img
+                      src="icon-ggug.png"
+                      width="15"
+                      style={{ marginRight: 3 }}
+                    />
+                    {item.name ? `${item.name}님` : '앱 미사용 손님'}
+                  </div>
+                  <div style={{ fontSize: '18px' }}>{item.phone}</div>
+                </div>
+              </div>
             ))
           ) : (
             <tr>
               <td>검색 결과가 없습니다.</td>
             </tr>
           )}
-        </tbody>
+        </div>
         <tfoot>
-          <td>
-            <Button onClick={this.handleOpneRegisterModal}>가입시키기</Button>
+          <td style={{ textAlign: 'center' }}>
+            <Button onClick={this.handleOpneRegisterModal}>손님 등록</Button>
           </td>
           <tr>
             <Modal isOpen={this.state.showRegisterModal} style={customStyles}>
-              <div>테스트중</div>
               <label>
-                핸드폰 번호 : <Input onChange={this.onPhoneInputChange} />
+                핸드폰 번호
+                <Input
+                  onChange={this.onPhoneInputChange}
+                  className="InputInModal"
+                  placeholder="010-1234-1234"
+                />
               </label>
-              <Button onClick={this.guestRegister}>확인</Button>
-              <Button onClick={this.handleCloseeRegisterModal}>취소</Button>
+              <Button onClick={this.guestRegister} className="buttonInModal">
+                확인
+              </Button>
+              <Button
+                onClick={this.handleCloseeRegisterModal}
+                className="buttonInModal"
+              >
+                취소
+              </Button>
             </Modal>
           </tr>
         </tfoot>
