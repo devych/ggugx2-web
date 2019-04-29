@@ -225,7 +225,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div id="appContainer">
           {this.state.isLogin ? (
             <Nav storeName={this.state.storeName} />
           ) : (
