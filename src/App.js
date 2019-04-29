@@ -22,6 +22,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLogin: false,
       loginInfo: null,
       storeName: sessionStorage.getItem('storeName') || null,
       storeId: sessionStorage.getItem('storeId') || null,
@@ -34,6 +35,18 @@ class App extends Component {
     this.rewardConfirm = this.rewardConfirm.bind(this);
   }
 
+  checkLogin = () => {
+    //tokenTest하는부분 넣고
+    this.setState({ isLogin: true });
+  };
+
+  checkLogout = () => {
+    if (this.state.isLogin) {
+      this.setState({ isLogin: false }, () => {
+        alert('LogOut했습니다.');
+      });
+    }
+  };
   connectSocket(storeId) {
     let userinfo = { id: storeId, type: 'store' };
     socket.emit('register', userinfo);
@@ -91,7 +104,6 @@ class App extends Component {
 
   RealTimeSetStamps = () => {
     socket.on('stamp confirm to store', msg => {
-      console.log('stamp confirm to store', msg);
       let key = `${msg.customer}${new Date().getTime()}`;
       this.setState(
         {
@@ -114,7 +126,6 @@ class App extends Component {
     });
 
     socket.on('stamp add complete', msg => {
-      console.log('stamp add complete', msg);
       this.setState({
         stampsUseReq: this.state.stampsUseReq.concat({
           customer: msg.customer,
@@ -130,7 +141,6 @@ class App extends Component {
     });
 
     socket.on('reward confirm to store', msg => {
-      console.log('reward confirm to store', msg);
       let key = `${msg.customer}${new Date().getTime()}`;
       this.setState(
         {
@@ -153,7 +163,6 @@ class App extends Component {
     });
 
     socket.on('reward use complete', msg => {
-      console.log('reward use complete', msg);
       this.setState({
         rewardsUseReq: this.state.rewardsUseReq.concat({
           customer: msg.customer,
@@ -217,7 +226,11 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav storeName={this.state.storeName} />
+          {this.state.isLogin ? (
+            <Nav storeName={this.state.storeName} />
+          ) : (
+            <Nav storeName={this.state.storeName} />
+          )}
           <Route exact path="/" component={Signin} />
           <Switch>
             <Route path="/Mainpage" component={Mainpage} />
@@ -235,6 +248,10 @@ class App extends Component {
             <Route path="/ShopMng" component={ShopMng} />
             <Route path="/Caffeinfo" component={Caffeinfo} />
             <Route path="/Caffemenu" component={Caffemenu} />
+            <Route
+              path="/Signin"
+              render={() => <Signin checkLogin={this.checkLogin} />}
+            />
             <Route path="/Signin" component={Signin} />
             <Route path="/Signup" component={Signup} />
           </Switch>

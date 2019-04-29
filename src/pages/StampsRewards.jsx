@@ -16,14 +16,12 @@ class StampsRewards extends Component {
       stampConfirm,
       rewardConfirm
     } = this.props;
-    console.log(this.props);
     return (
       <div className="StampsRewards">
         <div className="Stamps">
           <h3 id="id-header">쿠폰 적립 리스트</h3>
           {stampsUseReq &&
             stampsUseReq.map(stampsReq => {
-              console.log(stampsReq);
               return (
                 <StampsReqList
                   req={stampsReq}
@@ -37,7 +35,6 @@ class StampsRewards extends Component {
           <h3 id="id-header">교환권 사용 리스트</h3>
           {rewardsUseReq &&
             rewardsUseReq.map(rewardsReq => {
-              console.log(rewardsReq);
               return (
                 <StampsReqList
                   req={rewardsReq}

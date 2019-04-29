@@ -50,13 +50,15 @@ class InfoEntrySet extends Component {
       children,
       value,
       onClick,
-      onChange
+      onChange,
+      type
     } = this.props;
     return (
       <tr>
         <td>{label}</td>
         <td className="infoInput">
           <Input
+            type={type}
             placeholder={placeholder}
             className={className}
             value={value}

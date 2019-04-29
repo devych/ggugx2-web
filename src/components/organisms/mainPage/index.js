@@ -4,9 +4,6 @@ import ContentsList from '../contentsList';
 import './index.css';
 
 class mainPage extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div className="MainPage">
