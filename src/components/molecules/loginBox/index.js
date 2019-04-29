@@ -49,12 +49,12 @@ class LoginBox extends Component {
     return (
       <span className="loginBox">
         <span className="bigTitle">
-          <h1>Admin Login</h1>
+          <h3>매장 관리자 로그인</h3>
         </span>
         <span className="loginInfo">
           <ul className="loginInfo">
             <Input
-              placeholder="phoneNumber"
+              placeholder="02-123-1234"
               onChange={e => {
                 this.setState({
                   phone: e.target.value
@@ -64,7 +64,7 @@ class LoginBox extends Component {
           </ul>
           <span className="loginInfo">
             <Input
-              placeholder="password"
+              placeholder="비밀번호"
               type="password"
               onChange={e => {
                 this.setState({
@@ -75,9 +75,9 @@ class LoginBox extends Component {
           </span>
         </span>
         <span className="loginRegiButton">
-          <Button onClick={() => this.userLogin()}> Login </Button>
+          <Button onClick={() => this.userLogin()}> 로그인 </Button>
           <Button onClick={() => this.props.history.push('/Signup')}>
-            Register
+            가입
           </Button>
         </span>
       </span>

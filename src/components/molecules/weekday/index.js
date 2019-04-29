@@ -7,12 +7,13 @@ class Weekday extends Component {
   render() {
     const { id, defaultChecked, onChange, label } = this.props;
     return (
-      <label>
+      <label style={{ marginRight: '5px' }}>
         <input
           type="checkbox"
           id={id}
           defaultChecked={defaultChecked}
           onChange={onChange}
+          style={{ verticalAlign: 'top' }}
         />
         {label}
       </label>
