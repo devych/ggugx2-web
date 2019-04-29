@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../../../modules/impAxiosDefault';
 import serverUrl from '../../../serverInfo';
 import Input from '../../atoms/input/index';
 import Button from '../../atoms/button/index';
@@ -32,7 +32,7 @@ class CafeMenuAdd extends Component {
       })
       .then(res => {
         alert('메뉴가 추가되었습니다.');
-        console.log(res);
+        // console.log(res);
       })
       .then(() => {
         this.props.checkUpdateMenu();

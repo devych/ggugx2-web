@@ -4,6 +4,7 @@ import Button from '../../atoms/button';
 class StampsReqList extends Component {
   render() {
     const { req, onClick } = this.props;
+    console.log(req);
 
     return req.type === 'stampAdd' || req.type === 'rewardUseComplete' ? (
       <ul id={req.key} key={req.key}>
