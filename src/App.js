@@ -23,6 +23,7 @@ class App extends Component {
     super(props);
     this.state = {
       loginInfo: null,
+      storeName: sessionStorage.getItem('storeName') || null,
       storeId: sessionStorage.getItem('storeId') || null,
       stampsUseReq: [],
       rewardsUseReq: [],
@@ -53,9 +54,7 @@ class App extends Component {
   stampConfirm(e) {
     e.preventDefault();
     let stampReqListArr = JSON.parse(JSON.stringify(this.state.stampsUseReq));
-    console.log('TCL: App -> stampConfirm -> stampReqListArr', stampReqListArr);
     let matchData = stampReqListArr.filter(item => item.key === e.target.id);
-    console.log('TCL: App -> stampConfirm -> matchData', matchData);
 
     socket.emit('stamp confirm from store', {
       store: this.state.storeId,
@@ -71,12 +70,7 @@ class App extends Component {
   rewardConfirm(e) {
     e.preventDefault();
     let rewardReqListArr = JSON.parse(JSON.stringify(this.state.rewardsUseReq));
-    console.log(
-      'TCL: App -> rewardConfirm -> rewardReqListArr',
-      rewardReqListArr
-    );
     let matchData = rewardReqListArr.filter(item => item.key === e.target.id);
-    console.log('TCL: App -> rewardConfirm -> matchData', matchData);
 
     socket.emit('reward confirm from store', {
       store: this.state.storeId,
@@ -223,7 +217,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav />
+          <Nav storeName={this.state.storeName} />
           <Route exact path="/" component={Signin} />
           <Switch>
             <Route path="/Mainpage" component={Mainpage} />

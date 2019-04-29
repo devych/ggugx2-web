@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { FilePond } from 'react-filepond';
 import axios from '../../../modules/impAxiosDefault';
+import 'filepond/dist/filepond.min.css';
 import serverUrl from '../../../serverInfo';
 import './index.css';
 import ImageBox from '../../molecules/imageBox/index';
@@ -64,7 +66,31 @@ class InfoSetting extends Component {
             <tr>
               <td>사진업로드</td>
               <td>
-                <input type="data" />
+                <FilePond
+                  allowMultiple={false}
+                  server={{
+                    url: `${serverUrl}`,
+                    process: {
+                      url: '/stores/upload-image',
+                      method: 'POST',
+                      withCredentials: false,
+                      headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem(
+                          'token'
+                        )}`
+                      },
+                      timeout: 7000,
+                      ondata: formData => {
+                        formData.append('storeId', this.state.storeId);
+                        formData.append('isMain', true);
+                        return formData;
+                      },
+                      onload: res => {
+                        console.log(res);
+                      }
+                    }
+                  }}
+                />
               </td>
             </tr>
             <InfoEntrySet

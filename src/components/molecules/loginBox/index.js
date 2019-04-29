@@ -22,6 +22,7 @@ class LoginBox extends Component {
     if (sessionStorage.getItem('token')) {
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('storeId');
+      sessionStorage.removeItem('storeName');
     }
     axios
       .post(
@@ -36,7 +37,7 @@ class LoginBox extends Component {
         console.log(res);
         token = res.data.token;
         storeId = res.data.storeid;
-        storeName = res.data.storeName;
+        storeName = res.data.storename;
         sessionStorage.setItem('storeId', storeId);
         sessionStorage.setItem('storeName', storeName);
         sessionStorage.setItem('token', token);
