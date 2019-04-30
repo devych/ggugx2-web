@@ -1,5 +1,5 @@
 .subNav {
-  background: blueviolet;
+  background: rgb(208, 66, 66);
   display: table;
   table-layout: fixed;
   right: 0px;
@@ -15,11 +15,12 @@
   display: table-cell;
   color: white;
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
 .subItem:hover {
-  background: rgb(149, 70, 223);
+  background: rgb(214, 88, 88);
 }
 
 .subItem:active {
@@ -28,14 +29,13 @@
 }
 
 .shopMng {
-  margin: 0 5px;
-  border-color: chocolate;
-  border-style: solid;
+  /* margin: 0 5px; */
+  border: 0px;
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
   grid-gap: 10px;
   grid-template-areas:
-    '. s s'
+    's s s'
     'p b b'
     'p b b'
     '. . .';
