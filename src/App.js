@@ -22,7 +22,6 @@ import Button from './components/atoms/button';
 import checkValidJwt from './modules/checkValidJwt';
 
 const socket = io(`${serverUrl}`);
-// const socket = io(`http://localhost:3000`);
 
 class App extends Component {
   constructor(props) {
@@ -100,7 +99,7 @@ class App extends Component {
       customer: matchData[0].customer,
       confirm: true
     });
-
+    this.NotifyDismiss(e.target.id);
     this.getIndex(stampReqListArr, e);
     this.setState({ stampsUseReq: stampReqListArr });
   }
@@ -116,7 +115,7 @@ class App extends Component {
       customer: matchData[0].customer,
       confirm: true
     });
-
+    this.NotifyDismiss(e.target.id);
     this.getIndex(rewardReqListArr, e);
     this.setState({ rewardsUseReq: rewardReqListArr });
   }
@@ -248,7 +247,8 @@ class App extends Component {
         <Button id={key} onClick={this.stampConfirm} className="buttonInToast">
           {msg.customerName}님의 스탬프 적립 수락
         </Button>
-      </div>
+      </div>,
+      { toastId: key }
     );
   };
 
@@ -259,8 +259,13 @@ class App extends Component {
         <Button id={key} onClick={this.rewardConfirm} className="buttonInToast">
           {msg.customerName}님의 교환권 사용 수락
         </Button>
-      </div>
+      </div>,
+      { toastId: key }
     );
+  };
+
+  NotifyDismiss = key => {
+    toast.dismiss(key);
   };
 
   render() {
@@ -334,7 +339,6 @@ class App extends Component {
                 <Signin history={this.history} checkLogin={this.checkLogin} />
               )}
             />
-            {/* <Route path="/Signin" component={Signin} /> */}
             <Route path="/Signup" component={Signup} />
           </Switch>
           <ToastContainer
