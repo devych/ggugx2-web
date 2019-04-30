@@ -46,9 +46,9 @@
   justify-content: space-between;
   /* align-content: space-between; */
 }
-.flexInModal span {
-  /* width: 100px; */
-}
+/* .flexInModal span {
+  width: 100px;
+} */
 /* .colWidthInModal {
 
 } */
@@ -57,7 +57,7 @@
   width: 60px;
 }
 .InputInModal {
-  margin: 10px;
+  margin: 10px 5px;
 }
 
 .InputInModal::placeholder {

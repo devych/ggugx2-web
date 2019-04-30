@@ -136,9 +136,7 @@ class App extends Component {
           stampsUseReq: this.state.stampsUseReq.concat({
             customer: msg.customer,
             type: 'stampRequest',
-            message: `[stamp confirm] ${
-              msg.customerName
-            } 고객님이 쿠폰 적립을 요청했습니다!`,
+            message: `${msg.customerName}님의 요청`,
             key: `${msg.customer}${new Date().getTime()}`,
             time: this.getTime(1)
           })
@@ -158,9 +156,7 @@ class App extends Component {
           stampsUseReq: this.state.stampsUseReq.concat({
             customer: msg.customer,
             type: 'stampAdd',
-            message: `[complete] ${
-              msg.customerName
-            } 고객님의 적립이 완료되었습니다.`,
+            message: `[완료] ${msg.customerName}님`,
             key: `${msg.customer}${new Date().getTime()}`,
             time: this.getTime(1)
           })
@@ -185,9 +181,7 @@ class App extends Component {
           rewardsUseReq: this.state.rewardsUseReq.concat({
             customer: msg.customer,
             type: 'rewardUseRequest',
-            message: `[stamp confirm] ${
-              msg.customerName
-            } 고객님이 교환권 사용을 요청했습니다!`,
+            message: `${msg.customerName}님의 요청`,
             key: `${msg.customer}${new Date().getTime()}`,
             time: this.getTime(1)
           })
@@ -206,9 +200,7 @@ class App extends Component {
           rewardsUseReq: this.state.rewardsUseReq.concat({
             customer: msg.customer,
             type: 'rewardUseComplete',
-            message: `[reward use complete] ${
-              msg.customerName
-            } 고객님의 교환권 사용이 완료되었습니다.`,
+            message: `[완료] ${msg.customerName}님`,
             key: `${msg.customer}${new Date().getTime()}`,
             time: this.getTime(1)
           })
@@ -252,11 +244,9 @@ class App extends Component {
   stampsUseNotify = (msg, key) => {
     toast(
       <div>
-        <div>
-          [stamp confirm] {msg.customerName} 고객님이 쿠폰 적립을 요청했습니다!
-        </div>
-        <Button id={key} onClick={this.stampConfirm}>
-          적립하기
+        {/* <div className="TextInToast">{msg.customerName}님의 스탬프 적립 요청</div> */}
+        <Button id={key} onClick={this.stampConfirm} className="buttonInToast">
+          {msg.customerName}님의 스탬프 적립 수락
         </Button>
       </div>
     );
@@ -265,12 +255,9 @@ class App extends Component {
   rewardsUseNotify = (msg, key) => {
     toast(
       <div>
-        <div>
-          [reward confirm] {msg.customerName} 고객님이 교환권 사용을
-          요청했습니다!
-        </div>
-        <Button id={key} onClick={this.rewardConfirm}>
-          허락하기
+        {/* <div className="TextInToast">{msg.customerName}님의 교환권 사용 요청</div> */}
+        <Button id={key} onClick={this.rewardConfirm} className="buttonInToast">
+          {msg.customerName}님의 교환권 사용 수락
         </Button>
       </div>
     );
