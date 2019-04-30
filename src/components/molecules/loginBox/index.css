@@ -1,7 +1,6 @@
 .loginBox {
   margin: 0 5px;
-  border-color: chocolate;
-  border-style: solid;
+  border: 0px;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   grid-gap: 10px;
@@ -30,7 +29,7 @@
   grid-area: c;
   align-content: center;
   padding: 3px;
-  padding-bottom: 30px;
+  padding-bottom: 60px;
 }
 
 button {
