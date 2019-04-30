@@ -12,19 +12,33 @@ class StampsReqList extends Component {
       </ul>
     ) : (
       <ul id={req.key} key={req.key}>
-        {req.message}
-        <Button
-          id={req.key}
-          onClick={onClick}
-          className="stamps-rewards-confirm-btn"
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%'
+          }}
         >
-          <img
-            src="https://img.icons8.com/color/96/000000/checked.png"
-            alt="confirm"
-            width="30"
-            id={req.key}
+          <div style={{ marginRight: '5px' }}>{req.message}</div>
+          <div
+            style={{
+              overflow: 'hidden',
+              flex: 1,
+              backgroundImage: 'url(./dotdotdot.png)',
+              backgroundSize: 'contain',
+              height: '10px'
+            }}
           />
-        </Button>
+          <Button
+            id={req.key}
+            onClick={onClick}
+            className="stamps-rewards-confirm-btn"
+          >
+            <img src="icon-confirm.png" alt="confirm" width="30" id={req.key} />
+          </Button>
+        </div>
       </ul>
     );
   }

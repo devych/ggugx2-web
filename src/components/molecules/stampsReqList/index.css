@@ -3,9 +3,15 @@
   height: 30px;
   padding: 0px;
   margin: 0px;
+  margin-left: 5px;
   background-color: transparent;
+  /* border: 1px dotted red; */
 }
 
 .stamps-rewards-confirm-btn:hover {
   background-color: transparent;
+}
+
+.stamps-rewards-confirm-btn img:hover {
+  filter: opacity(0.7);
 }
