@@ -16,9 +16,7 @@ class InfoEntrySet extends Component {
   }
 
   onHandelChange = e => {
-    this.setState({ willUploadData: e.target.value }, () => {
-      console.log(this.state.willUploadData);
-    });
+    this.setState({ willUploadData: e.target.value });
   };
 
   updateNewInfo = e => {

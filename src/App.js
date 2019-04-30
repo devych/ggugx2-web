@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 import io from 'socket.io-client';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,7 +28,7 @@ class App extends Component {
     super(props);
     this.state = {
       isLogin: false,
-      loginInfo: null,
+      loginInfo: true,
       storeName: sessionStorage.getItem('storeName') || null,
       storeId: sessionStorage.getItem('storeId') || null,
       stampsUseReq: [],
@@ -33,16 +38,20 @@ class App extends Component {
     this.state.storeId && this.RealTimeSetStamps();
     this.stampConfirm = this.stampConfirm.bind(this);
     this.rewardConfirm = this.rewardConfirm.bind(this);
+    this.checkLogin = this.checkLogin.bind(this);
   }
 
   checkLogin = () => {
     //tokenTest하는부분 넣고
-    this.setState({ isLogin: true });
+    this.setState({ isLogin: true, loginInfo: true });
   };
 
   checkLogout = () => {
     if (this.state.isLogin) {
       this.setState({ isLogin: false }, () => {
+        sessionStorage.removeItem('storeId');
+        sessionStorage.removeItem('storeName');
+        sessionStorage.removeItem('token');
         alert('LogOut했습니다.');
       });
     }
@@ -63,6 +72,18 @@ class App extends Component {
       ? arr.splice(index, 1)
       : new Error('키가 올바르지 않습니다.');
   }
+
+  getIndexWithoutEvent = (arr, key) => {
+    let index;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].key === key) {
+        index = i;
+      }
+    }
+    return index > -1
+      ? arr.splice(index, 1)
+      : new Error('키가 올바르지 않습니다.');
+  };
 
   stampConfirm(e) {
     e.preventDefault();
@@ -126,17 +147,29 @@ class App extends Component {
     });
 
     socket.on('stamp add complete', msg => {
-      this.setState({
-        stampsUseReq: this.state.stampsUseReq.concat({
-          customer: msg.customer,
-          type: 'stampAdd',
-          message: `[complete] ${
-            msg.customerName
-          } 고객님의 적립이 완료되었습니다.`,
-          key: `${msg.customer}${new Date().getTime()}`,
-          time: this.getTime(1)
-        })
-      });
+      let key = `${msg.customer}${new Date().getTime()}`;
+      this.setState(
+        {
+          stampsUseReq: this.state.stampsUseReq.concat({
+            customer: msg.customer,
+            type: 'stampAdd',
+            message: `[complete] ${
+              msg.customerName
+            } 고객님의 적립이 완료되었습니다.`,
+            key: `${msg.customer}${new Date().getTime()}`,
+            time: this.getTime(1)
+          })
+        },
+        () => {
+          setTimeout(() => {
+            let stampsReqListArr = JSON.parse(
+              JSON.stringify(this.state.stampsUseReq)
+            );
+            this.getIndexWithoutEvent(stampsReqListArr, key);
+            this.setState({ stampsUseReq: stampsReqListArr });
+          }, 10000);
+        }
+      );
       window.scrollTo(0, document.body.scrollHeight);
     });
 
@@ -155,7 +188,6 @@ class App extends Component {
           })
         },
         () => {
-          console.log(this.state.rewardsUseReq);
           this.rewardsUseNotify(msg, key);
         }
       );
@@ -163,32 +195,44 @@ class App extends Component {
     });
 
     socket.on('reward use complete', msg => {
+      let key = `${msg.customer}${new Date().getTime()}`;
+      this.setState(
+        {
+          rewardsUseReq: this.state.rewardsUseReq.concat({
+            customer: msg.customer,
+            type: 'rewardUseComplete',
+            message: `[reward use complete] ${
+              msg.customerName
+            } 고객님의 교환권 사용이 완료되었습니다.`,
+            key: `${msg.customer}${new Date().getTime()}`,
+            time: this.getTime(1)
+          })
+        },
+        () => {
+          setTimeout(() => {
+            let rewardsReqListArr = JSON.parse(
+              JSON.stringify(this.state.rewardsUseReq)
+            );
+            this.getIndexWithoutEvent(rewardsReqListArr, key);
+            this.setState({ rewardsUseReq: rewardsReqListArr });
+          }, 10000);
+        }
+      );
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+
+    socket.on('errors', msg => {
       this.setState({
-        rewardsUseReq: this.state.rewardsUseReq.concat({
+        reqErr: this.state.reqErr.concat({
           customer: msg.customer,
-          type: 'rewardUseComplete',
-          message: `[reward use complete] ${
-            msg.customerName
-          } 고객님의 교환권 사용이 완료되었습니다.`,
+          type: 'error',
+          message: `[error] ${msg.message}`,
           key: `${msg.customer}${new Date().getTime()}`,
           time: this.getTime(1)
         })
       });
       window.scrollTo(0, document.body.scrollHeight);
     });
-
-    // socket.on('errors', msg => {
-    //   this.setState({
-    //     reqErr: this.state.reqErr.concat({
-    //       customer: msg.customer,
-    //       type: 'error',
-    //       message: `[error] ${msg.message}`,
-    //       key: `${msg.customer}${new Date().getTime()}`,
-    //       time: this.getTime(1)
-    //     })
-    //   });
-    //   window.scrollTo(0, document.body.scrollHeight);
-    // });
   };
 
   componentDidMount() {
@@ -223,36 +267,80 @@ class App extends Component {
   };
 
   render() {
+    const { isLogin, loginInfo } = this.state;
     return (
       <Router>
         <div id="appContainer">
-          {this.state.isLogin ? (
-            <Nav storeName={this.state.storeName} />
-          ) : (
+          {!isLogin && loginInfo ? null : (
             <Nav storeName={this.state.storeName} />
           )}
-          <Route exact path="/" component={Signin} />
           <Switch>
-            <Route path="/Mainpage" component={Mainpage} />
             <Route
-              path="/StampsRewards/"
+              exact
+              path="/"
               render={() => (
-                <StampsRewards
-                  stampsUseReq={this.state.stampsUseReq}
-                  rewardsUseReq={this.state.rewardsUseReq}
-                  stampConfirm={this.stampConfirm}
-                  rewardConfirm={this.rewardConfirm}
-                />
+                <Signin history={this.history} checkLogin={this.checkLogin} />
               )}
             />
-            <Route path="/ShopMng" component={ShopMng} />
-            <Route path="/Caffeinfo" component={Caffeinfo} />
-            <Route path="/Caffemenu" component={Caffemenu} />
+
+            <Route
+              path="/Mainpage"
+              render={() =>
+                !isLogin && !loginInfo ? (
+                  <Redirect to="/Signin" />
+                ) : (
+                  <Mainpage />
+                )
+              }
+            />
+            <Route
+              path="/StampsRewards"
+              render={() =>
+                !isLogin && !loginInfo ? (
+                  <Redirect to="/Signin" />
+                ) : (
+                  <StampsRewards
+                    stampsUseReq={this.state.stampsUseReq}
+                    rewardsUseReq={this.state.rewardsUseReq}
+                    stampConfirm={this.stampConfirm}
+                    rewardConfirm={this.rewardConfirm}
+                  />
+                )
+              }
+            />
+            <Route
+              path="/ShopMng"
+              render={() =>
+                !isLogin && !loginInfo ? <Redirect to="/Signin" /> : <ShopMng />
+              }
+            />
+            <Route
+              path="/Caffeinfo"
+              render={() =>
+                !isLogin && !loginInfo ? (
+                  <Redirect to="/Signin" />
+                ) : (
+                  <Caffeinfo />
+                )
+              }
+            />
+            <Route
+              path="/Caffemenu"
+              render={() =>
+                !isLogin && !loginInfo ? (
+                  <Redirect to="/Signin" />
+                ) : (
+                  <Caffemenu />
+                )
+              }
+            />
             <Route
               path="/Signin"
-              render={() => <Signin checkLogin={this.checkLogin} />}
+              render={() => (
+                <Signin history={this.history} checkLogin={this.checkLogin} />
+              )}
             />
-            <Route path="/Signin" component={Signin} />
+            {/* <Route path="/Signin" component={Signin} /> */}
             <Route path="/Signup" component={Signup} />
           </Switch>
           <ToastContainer
