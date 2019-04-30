@@ -58,6 +58,7 @@ class LoginBox extends Component {
           <h3>매장 관리자 로그인</h3>
         </span>
         <span className="loginInfo">
+          <img src="./muziLogin.png" alt="muzi" width="60" />
           <ul className="loginInfo">
             <Input
               placeholder="02-123-1234"

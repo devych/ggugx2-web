@@ -1,7 +1,6 @@
 .registerBox {
   margin: 0 5px;
-  border-color: chocolate;
-  border-style: solid;
+  border: 0px;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   grid-gap: 10px;
@@ -31,4 +30,20 @@
   width: 300px;
   grid-area: c;
   margin-bottom: 20px;
+}
+
+.addressFindInput {
+  width: 252px;
+  margin: auto;
+  align-self: center;
+}
+
+.btn-cancel {
+  background-color: lightgray;
+  align-self: center;
+}
+
+.addressResultEntry {
+  width: 300px;
+  background-color: #eee;
 }

@@ -25,8 +25,8 @@ code {
   flex-wrap: nowrap;
   /* border: 1px solid gray; */
   display: grid;
-  grid-template-columns: 1fr 1.8fr 1.8fr;
-  grid-gap: 10px;
+  grid-template-columns: 0.9fr 1.9fr 1.9fr;
+  grid-gap: 0px;
   grid-template-areas:
     'p a b'
     'p a b'
@@ -34,7 +34,7 @@ code {
   justify-items: center;
   padding-inline-start: 0px;
   height: 100%;
-  padding-right: 15px;
+  padding-bottom: 20px;
 }
 
 .phoneSearchBox {
@@ -60,7 +60,7 @@ code {
   grid-area: a;
   font-size: 1.25rem;
   height: 20em;
-  width: 100%;
+  width: 90%;
   overflow: scroll;
   border: 1px solid rgb(183, 191, 199);
   border-radius: 4px;
@@ -76,7 +76,7 @@ code {
   grid-area: b;
   font-size: 1.25rem;
   height: 20em;
-  width: 100%;
+  width: 90%;
   overflow: scroll;
   border: 1px solid rgb(183, 191, 199);
   border-radius: 4px;

@@ -1,7 +1,6 @@
 .loginBox {
   margin: 0 5px;
-  border-color: chocolate;
-  border-style: solid;
+  border: 0px;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   grid-gap: 10px;
@@ -15,14 +14,17 @@
 .bigTitle {
   grid-area: a;
   align-content: center;
-  margin: 0 0 5px 5px;
   padding: 3px;
+}
+.bigTitle h3 {
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
 }
 
 .loginInfo {
   grid-area: b;
   align-content: center;
-  margin: 0 0 5px 5px;
+  margin: 1px;
   padding: 3px;
 }
 
@@ -30,7 +32,7 @@
   grid-area: c;
   align-content: center;
   padding: 3px;
-  padding-bottom: 30px;
+  padding-bottom: 60px;
 }
 
 button {
