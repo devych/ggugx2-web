@@ -4,11 +4,15 @@
   font-size: 25px;
   font-weight: bold;
 }
+#storeName:active {
+  color: white;
+}
 .nav {
   background: #5c7cfa;
   display: table;
   table-layout: fixed;
   width: 100%;
+  box-shadow: 0px 2px 4px 0px #0006;
 }
 
 .item {

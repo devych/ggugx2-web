@@ -53,7 +53,7 @@ class CafeMenuEdit extends Component {
     const { menu } = this.state;
 
     if (this.state.menu === null) {
-      return <div>wait a seconds</div>;
+      return <div className="waitMessageMenuPage">wait a seconds</div>;
     }
     return (
       <span className="cafeMenu">
@@ -62,7 +62,7 @@ class CafeMenuEdit extends Component {
             <tr>
               <th>메뉴</th>
               <th>가격</th>
-              <th>수정버튼</th>
+              {/* <th>수정버튼</th> */}
             </tr>
             {menu &&
               menu.map(item => (

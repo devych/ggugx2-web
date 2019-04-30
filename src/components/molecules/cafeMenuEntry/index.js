@@ -5,7 +5,7 @@ const CafeMenuEntry = ({ itemName, price, onClick }) => {
   return (
     <tr>
       <td className="itemName">{itemName}</td>
-      <td className="itemPrice"> {price}</td>
+      <td className="itemPrice">{price}</td>
       <td>
         <Button id={itemName} onClick={onClick} children={'삭제'} />
       </td>

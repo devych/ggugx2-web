@@ -49,13 +49,10 @@ class InfoSetting extends Component {
 
   render() {
     if (this.state.store === null) {
-      return <div>wait a minute</div>;
+      return <div className="waitMessageInfoPage">wait a minute</div>;
     }
     return (
       <span className="infoSetBox">
-        <span>
-          {this.state.imgUrl ? <ImageBox imgs={this.state.imgUrl} /> : null}
-        </span>
         <table className="infoList">
           <tbody>
             {/* <InfoEntrySet
@@ -64,9 +61,17 @@ class InfoSetting extends Component {
             children={'등록'}
           /> */}
             <tr>
-              <td>사진업로드</td>
+              <td style={{ fontWeight: 'bold' }}>사진업로드</td>
+              <td>
+                <span>
+                  {this.state.imgUrl ? (
+                    <ImageBox imgs={this.state.imgUrl} />
+                  ) : null}
+                </span>
+              </td>
               <td>
                 <FilePond
+                  className={'filepond'}
                   allowMultiple={false}
                   server={{
                     url: `${serverUrl}`,
@@ -101,21 +106,21 @@ class InfoSetting extends Component {
             />
             <InfoEntrySet
               id="address"
-              label={'가게주소'}
+              label={'매장 주소'}
               placeholder={this.state.store.address}
               children={'수정'}
             />
             <InfoEntrySet
               id="openhour"
               type="time"
-              label={'오픈시간'}
+              label={'오픈 시간'}
               placeholder={this.state.store.openhour}
               children={'수정'}
             />
             <InfoEntrySet
               id="closehour"
               type="time"
-              label={'종료시간'}
+              label={'마감 시간'}
               placeholder={this.state.store.closehour}
               children={'수정'}
             />

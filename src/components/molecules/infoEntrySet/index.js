@@ -53,7 +53,7 @@ class InfoEntrySet extends Component {
     } = this.props;
     return (
       <tr>
-        <td>{label}</td>
+        <td style={{ fontWeight: 'bold' }}>{label}</td>
         <td className="infoInput">
           <Input
             type={type}
