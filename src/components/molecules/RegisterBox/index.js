@@ -329,7 +329,6 @@ class RegisterBox extends Component {
                     <Button
                       id={local.address_name}
                       children={local.address_name}
-                      onClick={this.setLocalNameToState.bind(this)}
                       onClick={e => this.setLocalNameToState(e)}
                     />
                   </tr>

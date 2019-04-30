@@ -13,13 +13,14 @@ class LoginBox extends Component {
       phone: null,
       password: null
     };
-  }
-  userLogin() {
+
     if (sessionStorage.getItem('token')) {
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('storeId');
       sessionStorage.removeItem('storeName');
     }
+  }
+  userLogin() {
     axios
       .post(
         `${serverUrl}/stores/signin`,

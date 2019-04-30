@@ -19,6 +19,7 @@ import Nav from './components/atoms/nav';
 import ShopMng from './components/organisms/shopMng';
 import StampsRewards from './pages/StampsRewards';
 import Button from './components/atoms/button';
+import checkValidJwt from './modules/checkValidJwt';
 
 const socket = io(`${serverUrl}`);
 // const socket = io(`http://localhost:3000`);
@@ -28,13 +29,17 @@ class App extends Component {
     super(props);
     this.state = {
       isLogin: false,
-      loginInfo: true,
+      showNav: false,
       storeName: sessionStorage.getItem('storeName') || null,
       storeId: sessionStorage.getItem('storeId') || null,
       stampsUseReq: [],
       rewardsUseReq: [],
       reqErr: []
     };
+
+    if (sessionStorage.getItem('storeId')) {
+      this.setState({ isLogin: true });
+    }
     this.state.storeId && this.RealTimeSetStamps();
     this.stampConfirm = this.stampConfirm.bind(this);
     this.rewardConfirm = this.rewardConfirm.bind(this);
@@ -43,7 +48,7 @@ class App extends Component {
 
   checkLogin = () => {
     //tokenTest하는부분 넣고
-    this.setState({ isLogin: true, loginInfo: true });
+    this.setState({ isLogin: true });
   };
 
   checkLogout = () => {
@@ -237,6 +242,11 @@ class App extends Component {
 
   componentDidMount() {
     this.connectSocket(this.state.storeId);
+    this.setState({ showNav: !this.state.showNav }, () => {
+      if (sessionStorage.getItem('storeId')) {
+        this.setState({ isLogin: true });
+      }
+    });
   }
 
   stampsUseNotify = (msg, key) => {
@@ -267,11 +277,12 @@ class App extends Component {
   };
 
   render() {
-    const { isLogin, loginInfo } = this.state;
+    const { isLogin } = this.state;
+    const checkJwt = sessionStorage.getItem('token');
     return (
       <Router>
         <div id="appContainer">
-          {!isLogin && loginInfo ? null : (
+          {!isLogin && !checkJwt ? null : (
             <Nav storeName={this.state.storeName} />
           )}
           <Switch>
@@ -286,17 +297,13 @@ class App extends Component {
             <Route
               path="/Mainpage"
               render={() =>
-                !isLogin && !loginInfo ? (
-                  <Redirect to="/Signin" />
-                ) : (
-                  <Mainpage />
-                )
+                !isLogin && !checkJwt ? <Redirect to="/Signin" /> : <Mainpage />
               }
             />
             <Route
               path="/StampsRewards"
               render={() =>
-                !isLogin && !loginInfo ? (
+                !isLogin && !checkJwt ? (
                   <Redirect to="/Signin" />
                 ) : (
                   <StampsRewards
@@ -311,13 +318,13 @@ class App extends Component {
             <Route
               path="/ShopMng"
               render={() =>
-                !isLogin && !loginInfo ? <Redirect to="/Signin" /> : <ShopMng />
+                !isLogin && !checkJwt ? <Redirect to="/Signin" /> : <ShopMng />
               }
             />
             <Route
               path="/Caffeinfo"
               render={() =>
-                !isLogin && !loginInfo ? (
+                !isLogin && !checkJwt ? (
                   <Redirect to="/Signin" />
                 ) : (
                   <Caffeinfo />
@@ -327,7 +334,7 @@ class App extends Component {
             <Route
               path="/Caffemenu"
               render={() =>
-                !isLogin && !loginInfo ? (
+                !isLogin && !checkJwt ? (
                   <Redirect to="/Signin" />
                 ) : (
                   <Caffemenu />
