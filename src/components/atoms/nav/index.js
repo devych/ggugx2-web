@@ -9,7 +9,7 @@ class Nav extends Component {
       <span>
         <span className="nav">
           <span className="item" id="storeName">
-            {this.state.storeName} 정보
+            {this.state.storeName ? this.state.storeName : null}
           </span>
           {/* <NavLink to="/MainPage" className="item">
         Main
@@ -35,6 +35,13 @@ class Nav extends Component {
           Signin
         </NavLink>
       )} */}
+          <NavLink
+            to="/Signin"
+            className="item"
+            onClick={() => this.props.checkLogout()}
+          >
+            로그아웃
+          </NavLink>
         </span>
       </span>
     );
