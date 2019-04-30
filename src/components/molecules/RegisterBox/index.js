@@ -312,36 +312,69 @@ class RegisterBox extends Component {
           가입하기
         </Button>
         <Modal isOpen={this.state.addrSearchModal} style={customStyles}>
-          <Input
-            placeholder={'읍,면,동 또는 도로명 주소를 입력해주세요.'}
-            onChange={this.getLocalName}
-          />
-          <Button onClick={this.searchRealAddress}>찾기</Button>
-          <Button onClick={this.handleCloseAddrSearchModal}>취소</Button>
+          <div style={{ display: 'flex' }}>
+            <div style={{ width: '100%' }}>
+              <Input
+                placeholder={'읍,면,동 또는 도로명 주소를 입력해주세요.'}
+                onChange={this.getLocalName}
+                className="addressFindInput"
+              />
+            </div>
+          </div>
+          <div>
+            <Button onClick={this.searchRealAddress}>찾기</Button>
+            <Button
+              onClick={this.handleCloseAddrSearchModal}
+              className="btn-cancel"
+            >
+              취소
+            </Button>
+          </div>
         </Modal>
         <Modal isOpen={this.state.showAddrListModal} style={customStyles}>
-          <table>
-            <caption>큰 주소</caption>
-            <tbody>
-              {this.state.localList && this.state.localList.length > 0 ? (
-                this.state.localList.map(local => (
-                  <tr>
-                    <Button
-                      id={local.address_name}
-                      children={local.address_name}
-                      onClick={e => this.setLocalNameToState(e)}
-                    />
-                  </tr>
-                ))
-              ) : (
-                <tbody>
-                  <tr>존재하지 않는 주소입니다.</tr>
-                  <tr>주소를 정확히 입력해주세요</tr>
-                </tbody>
-              )}
-            </tbody>
-            <button onClick={this.handleCloseShowAddrListModal}>취소</button>
-          </table>
+          <div
+            style={{
+              height: this.state.localList.length > 0 ? '300px' : '50px',
+              overflow: 'auto'
+            }}
+          >
+            {this.state.localList && this.state.localList.length > 0 ? (
+              this.state.localList.map(local => (
+                <div>
+                  <Button
+                    id={local.address_name}
+                    children={local.address_name}
+                    onClick={e => this.setLocalNameToState(e)}
+                    className="addressResultEntry"
+                  />
+                </div>
+              ))
+            ) : (
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <div>존재하지 않는 주소입니다.</div>
+                <div>주소를 정확히 입력해주세요</div>
+              </div>
+            )}
+          </div>
+          <div
+            style={{
+              textAlign: 'center'
+            }}
+          >
+            <Button
+              onClick={this.handleCloseShowAddrListModal}
+              className="btn-cancel"
+            >
+              닫기
+            </Button>
+          </div>
         </Modal>
       </table>
     );

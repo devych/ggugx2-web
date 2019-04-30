@@ -14,14 +14,17 @@
 .bigTitle {
   grid-area: a;
   align-content: center;
-  margin: 0 0 5px 5px;
   padding: 3px;
+}
+.bigTitle h3 {
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
 }
 
 .loginInfo {
   grid-area: b;
   align-content: center;
-  margin: 0 0 5px 5px;
+  margin: 1px;
   padding: 3px;
 }
 
