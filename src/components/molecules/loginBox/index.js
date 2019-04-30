@@ -13,8 +13,8 @@ class LoginBox extends Component {
       phone: null,
       password: null
     };
+    console.log('TCL: LoginBox -> constructor -> props', props);
   }
-
   userLogin() {
     if (sessionStorage.getItem('token')) {
       sessionStorage.removeItem('token');
@@ -42,7 +42,7 @@ class LoginBox extends Component {
         axios.defaults.headers.common[
           'Authorization'
         ] = `Bearer ${sessionStorage.getItem('token')}`;
-
+        this.props.checkLogin();
         this.props.history.push('/StampsRewards');
       })
       .catch(err => {

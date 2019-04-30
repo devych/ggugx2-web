@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import StampsReqList from '../components/molecules/stampsReqList';
 
 class StampsRewards extends Component {
@@ -49,4 +50,4 @@ class StampsRewards extends Component {
   }
 }
 
-export default StampsRewards;
+export default withRouter(StampsRewards);

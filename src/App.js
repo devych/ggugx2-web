@@ -33,6 +33,7 @@ class App extends Component {
     this.state.storeId && this.RealTimeSetStamps();
     this.stampConfirm = this.stampConfirm.bind(this);
     this.rewardConfirm = this.rewardConfirm.bind(this);
+    this.checkLogin = this.checkLogin.bind(this);
   }
 
   checkLogin = () => {
@@ -41,8 +42,12 @@ class App extends Component {
   };
 
   checkLogout = () => {
+    console.log('logout했습니다');
     if (this.state.isLogin) {
       this.setState({ isLogin: false }, () => {
+        sessionStorage.removeItem('storeId');
+        sessionStorage.removeItem('storeName');
+        sessionStorage.removeItem('token');
         alert('LogOut했습니다.');
       });
     }
@@ -177,18 +182,18 @@ class App extends Component {
       window.scrollTo(0, document.body.scrollHeight);
     });
 
-    // socket.on('errors', msg => {
-    //   this.setState({
-    //     reqErr: this.state.reqErr.concat({
-    //       customer: msg.customer,
-    //       type: 'error',
-    //       message: `[error] ${msg.message}`,
-    //       key: `${msg.customer}${new Date().getTime()}`,
-    //       time: this.getTime(1)
-    //     })
-    //   });
-    //   window.scrollTo(0, document.body.scrollHeight);
-    // });
+    socket.on('errors', msg => {
+      this.setState({
+        reqErr: this.state.reqErr.concat({
+          customer: msg.customer,
+          type: 'error',
+          message: `[error] ${msg.message}`,
+          key: `${msg.customer}${new Date().getTime()}`,
+          time: this.getTime(1)
+        })
+      });
+      window.scrollTo(0, document.body.scrollHeight);
+    });
   };
 
   componentDidMount() {
@@ -226,16 +231,18 @@ class App extends Component {
     return (
       <Router>
         <div>
-          {this.state.isLogin ? (
-            <Nav storeName={this.state.storeName} />
-          ) : (
-            <Nav storeName={this.state.storeName} />
-          )}
-          <Route exact path="/" component={Signin} />
+          {this.state.isLogin ? <Nav storeName={this.state.storeName} /> : null}
           <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Signin history={this.history} checkLogin={this.checkLogin} />
+              )}
+            />
             <Route path="/Mainpage" component={Mainpage} />
             <Route
-              path="/StampsRewards/"
+              path="/StampsRewards"
               render={() => (
                 <StampsRewards
                   stampsUseReq={this.state.stampsUseReq}
@@ -250,9 +257,11 @@ class App extends Component {
             <Route path="/Caffemenu" component={Caffemenu} />
             <Route
               path="/Signin"
-              render={() => <Signin checkLogin={this.checkLogin} />}
+              render={() => (
+                <Signin history={this.history} checkLogin={this.checkLogin} />
+              )}
             />
-            <Route path="/Signin" component={Signin} />
+            {/* <Route path="/Signin" component={Signin} /> */}
             <Route path="/Signup" component={Signup} />
           </Switch>
           <ToastContainer
