@@ -28,7 +28,7 @@ class App extends Component {
     super(props);
     this.state = {
       isLogin: false,
-      loginInfo: null,
+      loginInfo: true,
       storeName: sessionStorage.getItem('storeName') || null,
       storeId: sessionStorage.getItem('storeId') || null,
       stampsUseReq: [],
@@ -43,7 +43,7 @@ class App extends Component {
 
   checkLogin = () => {
     //tokenTest하는부분 넣고
-    this.setState({ isLogin: true });
+    this.setState({ isLogin: true, loginInfo: true });
   };
 
   checkLogout = () => {
@@ -267,11 +267,13 @@ class App extends Component {
   };
 
   render() {
-    const { isLogin } = this.state;
+    const { isLogin, loginInfo } = this.state;
     return (
       <Router>
         <div>
-          {isLogin ? <Nav storeName={this.state.storeName} /> : null}
+          {!isLogin && loginInfo ? null : (
+            <Nav storeName={this.state.storeName} />
+          )}
           <Switch>
             <Route
               exact
@@ -284,13 +286,17 @@ class App extends Component {
             <Route
               path="/Mainpage"
               render={() =>
-                !isLogin ? <Redirect to="/Signin" /> : <Mainpage />
+                !isLogin && !loginInfo ? (
+                  <Redirect to="/Signin" />
+                ) : (
+                  <Mainpage />
+                )
               }
             />
             <Route
               path="/StampsRewards"
               render={() =>
-                !isLogin ? (
+                !isLogin && !loginInfo ? (
                   <Redirect to="/Signin" />
                 ) : (
                   <StampsRewards
@@ -305,19 +311,27 @@ class App extends Component {
             <Route
               path="/ShopMng"
               render={() =>
-                !isLogin ? <Redirect to="/Signin" /> : <ShopMng />
+                !isLogin && !loginInfo ? <Redirect to="/Signin" /> : <ShopMng />
               }
             />
             <Route
               path="/Caffeinfo"
               render={() =>
-                !isLogin ? <Redirect to="/Signin" /> : <Caffeinfo />
+                !isLogin && !loginInfo ? (
+                  <Redirect to="/Signin" />
+                ) : (
+                  <Caffeinfo />
+                )
               }
             />
             <Route
               path="/Caffemenu"
               render={() =>
-                !isLogin ? <Redirect to="/Signin" /> : <Caffemenu />
+                !isLogin && !loginInfo ? (
+                  <Redirect to="/Signin" />
+                ) : (
+                  <Caffemenu />
+                )
               }
             />
             <Route
