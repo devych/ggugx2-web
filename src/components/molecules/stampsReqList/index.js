@@ -22,6 +22,7 @@ class StampsReqList extends Component {
             src="https://img.icons8.com/color/96/000000/checked.png"
             alt="confirm"
             width="30"
+            id={req.key}
           />
         </Button>
       </ul>
