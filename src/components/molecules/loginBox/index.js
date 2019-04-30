@@ -13,7 +13,6 @@ class LoginBox extends Component {
       phone: null,
       password: null
     };
-    console.log('TCL: LoginBox -> constructor -> props', props);
   }
   userLogin() {
     if (sessionStorage.getItem('token')) {

@@ -11,7 +11,6 @@ const checkValidJwt = () => {
     )
     .then(res => {
       console.log('success', res);
-      console.log('TCL: checkValidJwt -> isLogin', true);
       return true;
       //TODO: 이게 트루 리턴하게 하고 에러는 펄시한 값 리턴하게 만들어야함
     })

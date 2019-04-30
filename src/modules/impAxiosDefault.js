@@ -6,5 +6,4 @@ axios.defaults.headers.common[
   'Authorization'
 ] = `Bearer ${sessionStorage.getItem('token')}`;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
-console.log(axios.defaults.headers.common['Authorization']);
 export default axios;

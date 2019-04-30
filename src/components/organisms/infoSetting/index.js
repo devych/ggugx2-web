@@ -28,10 +28,7 @@ class InfoSetting extends Component {
       })
       .then(res => {
         var thisStore = res.data;
-        console.log(thisStore);
-        this.setState({ store: thisStore, imgUrl: thisStore.imgUrl }, () => {
-          console.log(this.state.imgUrl);
-        });
+        this.setState({ store: thisStore, imgUrl: thisStore.imgUrl });
       })
       .catch(err => {
         console.log(err.response);
