@@ -1,0 +1,11 @@
+.stamps-rewards-confirm-btn {
+  width: 30px;
+  height: 30px;
+  padding: 0px;
+  margin: 0px;
+  background-color: transparent;
+}
+
+.stamps-rewards-confirm-btn:hover {
+  background-color: transparent;
+}

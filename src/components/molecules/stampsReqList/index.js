@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../../atoms/button';
+import './index.css';
 
 class StampsReqList extends Component {
   render() {
@@ -12,8 +13,16 @@ class StampsReqList extends Component {
     ) : (
       <ul id={req.key} key={req.key}>
         {req.message}
-        <Button id={req.key} onClick={onClick}>
-          승인
+        <Button
+          id={req.key}
+          onClick={onClick}
+          className="stamps-rewards-confirm-btn"
+        >
+          <img
+            src="https://img.icons8.com/color/96/000000/checked.png"
+            alt="confirm"
+            width="30"
+          />
         </Button>
       </ul>
     );

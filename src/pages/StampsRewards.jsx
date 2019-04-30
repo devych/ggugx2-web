@@ -22,7 +22,9 @@ class StampsRewards extends Component {
       <div className="StampsRewards">
         <PhoneSearchList className="PhoneSearchList" />
         <div className="Stamps">
-          <h3 id="id-header">쿠폰 적립 리스트</h3>
+          <h3 id="id-header" className="stamps-rewards-title">
+            스탬프 적립 요청
+          </h3>
           {stampsUseReq &&
             stampsUseReq.map(stampsReq => {
               return (
@@ -35,7 +37,9 @@ class StampsRewards extends Component {
             })}
         </div>
         <div className="Rewards">
-          <h3 id="id-header">교환권 사용 리스트</h3>
+          <h3 id="id-header" className="stamps-rewards-title">
+            교환권 사용 요청
+          </h3>
           {rewardsUseReq &&
             rewardsUseReq.map(rewardsReq => {
               return (
