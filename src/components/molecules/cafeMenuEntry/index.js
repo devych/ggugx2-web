@@ -1,13 +1,13 @@
 import React from 'react';
 import Button from '../../atoms/button/index';
 
-const CafeMenuEntry = ({ itemName, price }) => {
+const CafeMenuEntry = ({ itemName, price, onClick }) => {
   return (
     <tr>
       <td className="itemName">{itemName}</td>
       <td className="itemPrice"> {price}</td>
       <td>
-        <Button children={'수정'} />
+        <Button id={itemName} onClick={onClick} children={'삭제'} />
       </td>
     </tr>
   );

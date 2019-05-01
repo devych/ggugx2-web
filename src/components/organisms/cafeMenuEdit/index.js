@@ -32,6 +32,21 @@ class CafeMenuEdit extends Component {
       });
   };
 
+  deleteMenu = e => {
+    let name = e.target.id;
+    axios
+      .post(`${serverUrl}/stores/delete-menu`, {
+        storeId: this.state.storeId,
+        name: name
+      })
+      .then(res => {
+        console.log(res.response);
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  };
+
   render() {
     const { menu } = this.state;
 
@@ -50,6 +65,7 @@ class CafeMenuEdit extends Component {
             {menu &&
               menu.map(item => (
                 <CafeMenuEntry
+                  onClick={this.deleteMenu}
                   itemName={item.name}
                   price={item.price}
                   key={item.name}
