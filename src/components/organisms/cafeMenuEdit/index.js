@@ -59,7 +59,7 @@ class CafeMenuEdit extends Component {
       <span className="cafeMenu">
         <table className="cafeMenuSet">
           <tbody>
-            <tr>
+            <tr style={{ height: '30px' }}>
               <th>메뉴</th>
               <th>가격</th>
               {/* <th>수정버튼</th> */}

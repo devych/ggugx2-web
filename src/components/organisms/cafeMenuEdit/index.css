@@ -7,6 +7,10 @@
   padding: 3px;
 }
 
+.cafeMenuSet {
+  min-height: 300px;
+}
+
 .waitMessageMenuPage {
   height: 500px;
 }
