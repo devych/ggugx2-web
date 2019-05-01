@@ -25,6 +25,7 @@ class StampsRewards extends Component {
           <h3 id="id-header" className="stamps-rewards-title">
             스탬프 적립 요청
           </h3>
+          <hr />
           {stampsUseReq &&
             stampsUseReq.map(stampsReq => {
               return (
@@ -40,6 +41,7 @@ class StampsRewards extends Component {
           <h3 id="id-header" className="stamps-rewards-title">
             교환권 사용 요청
           </h3>
+          <hr />
           {rewardsUseReq &&
             rewardsUseReq.map(rewardsReq => {
               return (

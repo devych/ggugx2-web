@@ -155,7 +155,7 @@ class App extends Component {
           stampsUseReq: this.state.stampsUseReq.concat({
             customer: msg.customer,
             type: 'stampAdd',
-            message: `[완료] ${msg.customerName}님`,
+            message: `${msg.customerName}님 적립 완료!`,
             key: `${msg.customer}${new Date().getTime()}`,
             time: this.getTime(1)
           })
@@ -199,7 +199,7 @@ class App extends Component {
           rewardsUseReq: this.state.rewardsUseReq.concat({
             customer: msg.customer,
             type: 'rewardUseComplete',
-            message: `[완료] ${msg.customerName}님`,
+            message: `${msg.customerName}님 사용 완료!`,
             key: `${msg.customer}${new Date().getTime()}`,
             time: this.getTime(1)
           })

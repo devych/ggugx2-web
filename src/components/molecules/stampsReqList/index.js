@@ -8,7 +8,15 @@ class StampsReqList extends Component {
 
     return req.type === 'stampAdd' || req.type === 'rewardUseComplete' ? (
       <ul id={req.key} key={req.key}>
-        {req.message}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img
+            src="./check.png"
+            alt="chat bubble"
+            width="18"
+            style={{ marginRight: '5px' }}
+          />
+          {req.message}
+        </div>
       </ul>
     ) : (
       <ul id={req.key} key={req.key}>
@@ -21,6 +29,13 @@ class StampsReqList extends Component {
             width: '100%'
           }}
         >
+          <div style={{ marginRight: '2px' }}>
+            <img
+              src="https://img.icons8.com/ios-glyphs/30/00bf92/filled-topic.png"
+              alt="chat bubble"
+              width="18"
+            />
+          </div>
           <div style={{ marginRight: '5px' }}>{req.message}</div>
           <div
             style={{

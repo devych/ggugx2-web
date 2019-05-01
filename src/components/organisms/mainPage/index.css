@@ -19,8 +19,8 @@
 
 .phoneSearchBox {
   grid-area: a;
-  border-color: chocolate;
-  border-style: solid;
+  /* border-color: chocolate;
+  border-style: solid; */
   align-content: center;
   margin: 0 0 20px 5px;
   padding: 3px;

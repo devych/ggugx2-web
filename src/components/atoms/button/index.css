@@ -1,10 +1,8 @@
 .Button {
   display: inline-block;
   width: 8rem;
-  height: 40px;
   border: 0px solid black;
   border-radius: 4px;
-  /* background-color: rgb(146, 217, 255); */
   background-color: rgb(253, 202, 10);
   font-size: 20px;
   color: black;
@@ -14,5 +12,4 @@
 .Button:hover {
   background-color: hsl(46, 98%, 67%);
   color: rgb(223, 58, 47);
-  cursor: pointer;
 }

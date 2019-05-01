@@ -1,7 +1,16 @@
 .cafeMenu {
   display: table;
+  /* width: 480px; */
   grid-area: b;
   align-content: center;
   margin: 0 0 5px 5px;
   padding: 3px;
+}
+
+.cafeMenuSet {
+  min-height: 300px;
+}
+
+.waitMessageMenuPage {
+  height: 500px;
 }

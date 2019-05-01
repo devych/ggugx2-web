@@ -195,8 +195,12 @@ class phoneSearchList extends Component {
                 <div id={item.phone} className="searchItem">
                   <div style={{ fontSize: '20px', fontWeight: 'bold' }}>
                     <img
-                      src="icon-ggug.png"
-                      width="15"
+                      src={
+                        item.name
+                          ? 'icon-ggug.png'
+                          : 'https://img.icons8.com/metro/26/94b7ae/gender-neutral-user.png'
+                      }
+                      width="16"
                       style={{ marginRight: 3 }}
                     />
                     {item.name ? `${item.name}님` : '앱 미사용 손님'}

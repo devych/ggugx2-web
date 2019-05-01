@@ -334,7 +334,13 @@ class RegisterBox extends Component {
         <Modal isOpen={this.state.showAddrListModal} style={customStyles}>
           <div
             style={{
-              height: this.state.localList.length > 0 ? '300px' : '50px',
+              height:
+                this.state.localList.length > 0
+                  ? `${50 *
+                      (this.state.localList.length < 6
+                        ? this.state.localList.length
+                        : 3)}px`
+                  : '50px',
               overflow: 'auto'
             }}
           >
