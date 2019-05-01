@@ -40,9 +40,11 @@ class CafeMenuEdit extends Component {
         name: name
       })
       .then(res => {
-        console.log(res.response);
+        this.checkUpdateMenu();
+        alert(`${name} 메뉴가 삭제되었습니다.`);
       })
       .catch(err => {
+        alert('다시 한번 시도해주세요.');
         console.log(err.response);
       });
   };
