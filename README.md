@@ -11,7 +11,7 @@
 
 ### `꾹꾹이 매장 스탬프 적립`
 
-![가입](https://i.imgur.com/FJj5RED.gif)
+![스탬프](https://i.imgur.com/FJj5RED.gif)
 
 ### `꾹꾹이 매장 교환권 사용`
 
