@@ -1,0 +1,36 @@
+#storeName {
+  background: #546cce;
+  width: 40%;
+  font-size: 25px;
+  font-weight: bold;
+}
+#storeName:active {
+  color: white;
+}
+.nav {
+  background: #5c7cfa;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  box-shadow: 0px 2px 4px 0px #0006;
+}
+
+.item {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: table-cell;
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.item:hover {
+  background: #748ffc;
+}
+
+.item:active {
+  background: white;
+  color: #5c7cfa;
+}

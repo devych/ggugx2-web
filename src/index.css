@@ -1,14 +1,111 @@
 body {
   margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  padding: 20px;
+  padding-right: 40px;
+  padding-left: 40px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#appContainer {
+  box-shadow: 0px 4px 6px 0px #00000066;
+  /* min-width: 900px; */
+  width: 920px;
+}
+
+.StampsRewards {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  /* border: 1px solid gray; */
+  display: grid;
+  grid-template-columns: 0.9fr 1.9fr 1.9fr;
+  grid-gap: 0px;
+  grid-template-areas:
+    'p a b'
+    'p a b'
+    '. . q';
+  justify-items: center;
+  padding-inline-start: 0px;
+  height: 100%;
+  padding-bottom: 20px;
+  padding-top: 5px;
+}
+
+.phoneSearchBox {
+  grid-area: p;
+}
+
+.StampsRewards ul {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.8em;
+  list-style-type: none;
+  padding: 0px;
+}
+
+.StampsRewards hr {
+  border: 0.5px solid lightgray;
+}
+
+.etcSpace {
+  grid-area: q;
+  box-shadow: 1px 1px 1px 1px gray;
+  background-color: #748ffc;
+  width: 100%;
+}
+
+.Stamps {
+  grid-area: a;
+  font-size: 1.25rem;
+  height: 20em;
+  width: 90%;
+  overflow: scroll;
+  border: 1px solid rgb(183, 191, 199);
+  border-radius: 4px;
+  margin-top: 9px;
+  padding: 0px 10px;
+  box-shadow: 1px 1px 4px 0px #0004;
+}
+.Stamps ul {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.Rewards {
+  grid-area: b;
+  font-size: 1.25rem;
+  height: 20em;
+  width: 90%;
+  overflow: scroll;
+  border: 1px solid rgb(183, 191, 199);
+  border-radius: 4px;
+  margin-top: 9px;
+  padding: 0px 10px;
+  box-shadow: 1px 1px 4px 0px #0004;
+}
+.Rewards ul {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.stamps-rewards-title {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  color: #333;
+}
+
+.buttonInToast {
+  width: 90%;
+  height: 30px;
+  font-size: 15px;
 }
